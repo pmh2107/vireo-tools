@@ -4,16 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JD Evaluator — Vireo Coaching</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --linen: #d7d3c6;
   --linen-light: #eae7df;
-  --linen-dark: #c8c4b5;
   --moss: #606c4d;
-  --moss-light: #e8eddf;
   --moss-dark: #454623;
   --ink: #48493d;
   --ink-muted: #65614e;
@@ -25,7 +23,7 @@
   --surface-alt: #efece5;
   --border: #d7d3c6;
   --white: #fdfcf9;
-  --green-signal: #606c4d;
+  --green-signal: #454623;
   --green-signal-light: #e8eddf;
   --amber-signal: #7a5c1e;
   --amber-signal-light: #f5edda;
@@ -42,8 +40,8 @@ html, body {
 }
 
 header {
-  background: var(--plum);
-  padding: 2.5rem 2.5rem 2rem;
+  background: var(--moss-dark);
+  padding: 1.5rem 2rem 2rem;
   position: relative;
 }
 
@@ -52,100 +50,67 @@ header::after {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--moss) 0%, var(--plum-mid) 50%, var(--linen) 100%);
+  background: linear-gradient(90deg, var(--plum) 0%, var(--plum-mid) 40%, var(--linen) 100%);
 }
 
-.logo-area {
+.header-top {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
   margin-bottom: 1.25rem;
 }
 
-.logo-mark {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--linen);
-  opacity: 0.9;
+.logo img {
+  height: 52px;
+  display: block;
 }
 
-.logo-divider {
-  width: 1px;
-  height: 16px;
-  background: rgba(215,211,198,0.3);
+.back-link {
+  font-size: 0.78rem;
+  color: rgba(215,211,198,0.6);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  font-weight: 400;
+  transition: color 0.15s;
+  white-space: nowrap;
 }
 
-.logo-sub {
-  font-size: 0.75rem;
-  color: rgba(215,211,198,0.5);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 300;
-}
+.back-link:hover { color: var(--linen); }
 
 header h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.25rem;
-  font-weight: 400;
+  font-family: 'Cormorant Garant', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
   line-height: 1.15;
   color: var(--linen);
+  margin-bottom: 0.6rem;
 }
 
 header h1 em {
   font-style: italic;
-  color: #b8a8ba;
+  color: #c4b8c6;
 }
 
-header p {
+.header-desc {
   font-size: 0.875rem;
-  color: rgba(215,211,198,0.55);
-  margin-top: 0.5rem;
+  color: rgba(215,211,198,0.65);
   font-weight: 300;
-  max-width: 480px;
+  line-height: 1.65;
+  max-width: 580px;
 }
+
+.header-desc a {
+  color: rgba(215,211,198,0.85);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.header-desc a:hover { color: var(--linen); }
 
 main {
-  max-width: 800px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 5rem;
-}
-
-.mode-row {
-  display: flex;
-  gap: 0.4rem;
-  margin-bottom: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.mode-btn {
-  padding: 0.35rem 0.9rem;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.82rem;
-  cursor: pointer;
-  color: var(--ink-muted);
-  transition: all 0.15s;
-  font-weight: 400;
-}
-
-.mode-btn:hover { border-color: var(--moss); color: var(--moss); }
-
-.mode-btn.active {
-  background: var(--plum);
-  color: var(--linen);
-  border-color: var(--plum);
-}
-
-.mode-desc {
-  font-size: 0.8rem;
-  color: var(--ink-faint);
-  margin-bottom: 1.25rem;
-  font-style: italic;
-  line-height: 1.5;
+  padding: 2rem 1.5rem 2rem;
 }
 
 .input-label {
@@ -160,7 +125,7 @@ main {
 
 textarea {
   width: 100%;
-  min-height: 190px;
+  min-height: 200px;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1rem 1.1rem;
@@ -177,22 +142,54 @@ textarea {
 textarea:focus { outline: none; border-color: var(--moss); }
 textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 
-.eval-btn {
+.run-btn {
   width: 100%;
-  padding: 0.85rem;
-  background: var(--moss-dark);
+  padding: 0.9rem;
+  background: var(--plum);
   color: var(--linen);
   border: none;
   border-radius: 8px;
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.05rem;
+  font-family: 'Cormorant Garant', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  letter-spacing: 0.03em;
   transition: all 0.2s;
 }
 
-.eval-btn:hover { background: var(--plum); }
-.eval-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.run-btn:hover { background: #2a1629; }
+.run-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.about-vireo {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 3px solid var(--moss);
+  background: var(--white);
+  border-radius: 0 8px 8px 0;
+}
+
+.about-vireo h3 {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--moss-dark);
+  margin-bottom: 0.4rem;
+}
+
+.about-vireo p {
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.about-vireo a {
+  color: var(--moss);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 .loading {
   display: none;
@@ -207,7 +204,7 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 .spinner {
   display: inline-block;
   width: 18px; height: 18px;
-  border: 2px solid var(--linen-dark);
+  border: 2px solid var(--linen);
   border-top-color: var(--moss);
   border-radius: 50%;
   animation: spin 0.75s linear infinite;
@@ -237,9 +234,10 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 }
 
 .score-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 3.25rem;
+  font-family: 'Cormorant Garant', serif;
+  font-size: 3.5rem;
   line-height: 1;
+  font-weight: 300;
 }
 
 .score-denom {
@@ -264,16 +262,16 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 .v-no { background: var(--red-signal-light); color: var(--red-signal); }
 
 .track {
-  height: 5px;
+  height: 4px;
   background: var(--surface-alt);
-  border-radius: 3px;
+  border-radius: 2px;
   overflow: hidden;
   margin-bottom: 1rem;
 }
 
 .fill {
   height: 100%;
-  border-radius: 3px;
+  border-radius: 2px;
   transition: width 0.9s ease;
 }
 
@@ -281,24 +279,14 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 .fill-caution { background: #c49a2a; }
 .fill-no { background: #c04040; }
 
-.sub-scores {
-  display: flex;
-  gap: 1.25rem;
-  margin-bottom: 0.75rem;
-}
-
-.sub-score-item {
-  font-size: 0.8rem;
-  color: var(--ink-muted);
-}
-
-.sub-score-item strong { color: var(--ink); }
-
 .bottom-line {
   font-size: 0.9rem;
   color: var(--ink-muted);
   font-style: italic;
   line-height: 1.65;
+  font-family: 'Cormorant Garant', serif;
+  font-size: 1.05rem;
+  font-weight: 300;
 }
 
 .section-card {
@@ -383,12 +371,15 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 }
 
 .q-item {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   line-height: 1.55;
   color: var(--ink);
   padding: 0.5rem 0.75rem;
   background: var(--surface-alt);
   border-radius: 6px;
+  font-family: 'Cormorant Garant', serif;
+  font-size: 1rem;
+  font-weight: 300;
   font-style: italic;
   border-left: 2px solid var(--plum-mid);
 }
@@ -407,9 +398,11 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 
 footer {
   text-align: center;
-  padding: 1rem 1.5rem 2rem;
+  padding: 1.5rem 1.5rem 2.5rem;
   font-size: 0.72rem;
   color: var(--ink-faint);
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
 }
 
 footer a { color: var(--ink-muted); text-decoration: none; }
@@ -419,78 +412,60 @@ footer a:hover { color: var(--plum); }
 <body>
 
 <header>
-  <div class="logo-area">
-    <span class="logo-mark">Vireo</span>
-    <span class="logo-divider"></span>
-    <span class="logo-sub">Coaching</span>
+  <div class="header-top">
+    <div class="logo">
+      <img src="Invert%20Colors%201.png" alt="Vireo Coaching">
+    </div>
+    <a href="https://www.vireo-coaching.com" class="back-link" target="_blank">← Back to Vireo</a>
   </div>
   <h1>Job Description <em>Evaluator</em></h1>
-  <p>Spot burnout signals before you apply. Powered by research — and hard-won experience.</p>
+  <p class="header-desc">Certain phrases in job descriptions can signal how a workplace actually functions. This tool uses a filter to evaluate JDs by reading between the lines for whether the position and/or workplace may or may not be neurodiversity-friendly. <a href="https://www.vireo-coaching.com/tldr-blog/burnoutflags" target="_blank">Smoke Signals: Spot Potential Burnout Before You Apply</a> describes the criteria in detail.</p>
 </header>
 
 <main>
-
-  <div style="margin-top:1.5rem;">
-    <div class="mode-row">
-      <button class="mode-btn active" onclick="setMode('nd')" id="btn-nd">Neurodivergent lens</button>
-      <button class="mode-btn" onclick="setMode('fit')" id="btn-fit">Research role fit</button>
-      <button class="mode-btn" onclick="setMode('both')" id="btn-both">Both</button>
-    </div>
-    <p class="mode-desc" id="mode-desc">Evaluates psychological safety signals, ambiguity red flags, and masking tax indicators for neurodivergent professionals.</p>
-  </div>
-
   <label class="input-label" for="jd">Paste job description</label>
   <textarea id="jd" placeholder="Paste the full job description here — title, responsibilities, qualifications, the works..."></textarea>
 
-  <button class="eval-btn" onclick="runEval()" id="eval-btn">Evaluate this role →</button>
+  <button class="run-btn" onclick="runEval()" id="eval-btn">Run JD Filter →</button>
+
+  <div class="about-vireo">
+    <h3>About Vireo</h3>
+    <p>Coaching is a guided process that helps you uncover, hone, and use your individual strengths. <a href="https://www.vireo-coaching.com" target="_blank">Learn more at vireo-coaching.com.</a></p>
+  </div>
 
   <div class="loading" id="loading"><span class="spinner"></span> Reading the signals...</div>
   <div class="err" id="err"></div>
   <div class="results" id="results"></div>
-
 </main>
 
 <footer>
-  <a href="https://www.vireo-coaching.com" target="_blank">vireo-coaching.com</a> &nbsp;·&nbsp; Built for neurodivergent professionals navigating the modern workplace.
+  <a href="https://www.vireo-coaching.com" target="_blank">vireo-coaching.com</a> &nbsp;·&nbsp; Built for neurodivergent professionals navigating the modern workplace. &nbsp;·&nbsp; <a href="https://www.vireo-coaching.com/tldr-blog/burnoutflags" target="_blank">Read: Smoke Signals</a>
 </footer>
 
 <script>
-let mode = 'nd';
-
-const modeDescs = {
-  nd: 'Evaluates psychological safety signals, ambiguity red flags, and masking tax indicators for neurodivergent professionals.',
-  fit: 'Evaluates strategic fit for senior mixed-methods research roles: decision impact, synthesis depth, ownership clarity, and IC advisory positioning.',
-  both: 'Full evaluation: neurodivergent sustainability signals AND strategic research role fit, with a combined verdict.'
-};
-
-function setMode(m) {
-  mode = m;
-  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('btn-' + m).classList.add('active');
-  document.getElementById('mode-desc').textContent = modeDescs[m];
-}
-
-const SYSTEM_ND = `You are an expert evaluator of job descriptions for neurodivergent professionals, drawing on research about masking, burnout, psychological safety, and workplace sustainability.
+const SYSTEM = `You are an expert evaluator of job descriptions for neurodivergent professionals, drawing on research about masking, burnout, psychological safety, and workplace sustainability.
 
 Evaluate using these red flag categories:
 1. "Fast-paced environment" — frequent priority shifts, context-switching, unpredictable pile-ons
-2. "Wears many hats" — unclear role lanes, ill-defined responsibilities, understaffed teams  
+2. "Wears many hats" — unclear role lanes, ill-defined responsibilities, understaffed teams
 3. Resilience/thick skin emphasis — toxic pressure normalized, poor planning, high conflict
 4. Ambiguous role/responsibility descriptions — vague ownership, unclear success metrics
 5. "High visibility" — always-on culture, meeting overload, no deep work time
 6. Heavy communication skills emphasis — informal politics, unspoken social dynamics
 
-Green signals: clear expectations, defined scope, autonomy, psychological safety language, structured communication, explicit success metrics, flexible/remote work, mentorship culture.
+Green signals: clear expectations, defined scope, autonomy, psychological safety language, structured communication, explicit success metrics, flexible/remote work, mentorship culture, asynchronous communication options.
+
+Score guide: 75+ = Neurodiversity-Friendly, 50-74 = Proceed with Caution, below 50 = Significant Concerns.
 
 Return ONLY valid JSON with this exact structure (no markdown, no explanation):
 {
   "score": <0-100>,
-  "verdict": <"Strong Go" | "Proceed with Caution" | "Hard No">,
-  "bottom_line": <1-2 sentences>,
-  "red_flags": [<specific phrases found with brief explanation>],
-  "green_signals": [<positive signals found>],
+  "verdict": <"Neurodiversity-Friendly" | "Proceed with Caution" | "Significant Concerns">,
+  "bottom_line": <1-2 sentences plain language summary>,
+  "red_flags": [<specific phrases found with brief explanation, quote the JD>],
+  "green_signals": [<positive signals found, quote the JD>],
   "yellow_flags": [<things to probe in screening>],
-  "questions_to_ask": [<3-4 specific interview questions>],
+  "questions_to_ask": [<3-4 specific interview questions based on what was found>],
   "ten_second": {
     "clear_expectations": <true|false>,
     "defined_scope": <true|false>,
@@ -499,83 +474,24 @@ Return ONLY valid JSON with this exact structure (no markdown, no explanation):
     "deep_work_possible": <true|false>
   }
 }
-Score guide: 75+ = Strong Go, 50-74 = Proceed with Caution, below 50 = Hard No. Quote actual JD phrases when flagging.`;
-
-const SYSTEM_FIT = `You evaluate job descriptions for a senior mixed-methods researcher with this ideal role profile:
-
-IDEAL: Senior IC role designing and leading research that uncovers non-obvious insights and directly informs strategic decisions, in a structured high-trust environment.
-
-HARD NO (any present = reject): research not tied to decisions, primarily tracking/KPI/dashboard work, vague ownership or unclear success metrics, "wear many hats" without structure, performative/always-on visibility, heavy client-service churn.
-
-PROCEED WITH CAUTION: market research language without clear strategic influence, consumer insights/brand tracking without decision impact, AI/data buzzwords without clear application, cross-functional role with unclear ownership.
-
-STRONG GO: explicit connection to decision-making/strategy, end-to-end ownership (design→analysis→synthesis→influence), complex ambiguous problem spaces, senior IC framing, synthesis/storytelling emphasis, global/cross-cultural dimension, high trust/autonomy environment.
-
-10-SECOND TEST: influences decisions? success defined? synthesis-heavy? advising not servicing? impact explicit?
-
-Return ONLY valid JSON (no markdown):
-{
-  "score": <0-100>,
-  "verdict": <"Strong Go" | "Proceed with Caution" | "Hard No">,
-  "bottom_line": <1-2 sentences>,
-  "red_flags": [<hard no signals found with JD quotes>],
-  "green_signals": [<strong go signals found with JD quotes>],
-  "yellow_flags": [<caution items to validate in screening>],
-  "questions_to_ask": [<3-4 validation questions from the ICP framework>],
-  "ten_second": {
-    "influences_decisions": <true|false>,
-    "success_defined": <true|false>,
-    "synthesis_heavy": <true|false>,
-    "advising_not_servicing": <true|false>,
-    "impact_explicit": <true|false>
-  }
-}`;
-
-const SYSTEM_BOTH = `You evaluate job descriptions on two frameworks simultaneously.
-
-FRAMEWORK 1 — NEURODIVERGENT SUSTAINABILITY:
-Red flags: "fast-paced" (context-switching chaos), "many hats" (unclear lanes), resilience/thick skin (normalized toxicity), ambiguous responsibilities (vague ownership), "high visibility" (always-on, no deep work), heavy communication skills emphasis (informal politics).
-Green signals: clear expectations, defined scope, autonomy, psych safety language, structured communication, flexible/remote work.
-
-FRAMEWORK 2 — RESEARCH ROLE FIT (senior mixed-methods IC):
-Hard no: research not tied to decisions, primarily tracking/KPI, vague ownership, performative visibility, client-service churn.
-Strong go: explicit decision-making connection, end-to-end ownership, synthesis/storytelling, complex problem spaces, senior IC framing, global dimension, high trust/autonomy.
-10-second test: influences decisions? success defined? synthesis-heavy? advising not servicing? impact explicit?
-
-Return ONLY valid JSON (no markdown):
-{
-  "score": <0-100, weighted average>,
-  "nd_score": <0-100>,
-  "fit_score": <0-100>,
-  "verdict": <"Strong Go" | "Proceed with Caution" | "Hard No">,
-  "bottom_line": <2-3 sentences covering both dimensions>,
-  "red_flags": [<combined red flags with JD quotes>],
-  "green_signals": [<combined green signals>],
-  "yellow_flags": [<combined caution items>],
-  "questions_to_ask": [<4-5 questions covering both frameworks>],
-  "ten_second": {
-    "influences_decisions": <true|false>,
-    "success_defined": <true|false>,
-    "synthesis_heavy": <true|false>,
-    "advising_not_servicing": <true|false>,
-    "psych_safety": <true|false>
-  }
-}`;
+Quote actual JD phrases when flagging. Be specific and honest.`;
 
 const TEN_LABELS = {
-  nd: { clear_expectations:'Clear expectations', defined_scope:'Defined scope', autonomy_signals:'Autonomy signals', psych_safety:'Psych safety language', deep_work_possible:'Deep work possible' },
-  fit: { influences_decisions:'Influences decisions', success_defined:'Success defined', synthesis_heavy:'Synthesis-heavy', advising_not_servicing:'Advising, not servicing', impact_explicit:'Impact explicit' },
-  both: { influences_decisions:'Influences decisions', success_defined:'Success defined', synthesis_heavy:'Synthesis-heavy', advising_not_servicing:'Advising, not servicing', psych_safety:'Psych safety' }
+  clear_expectations: 'Clear expectations',
+  defined_scope: 'Defined scope',
+  autonomy_signals: 'Autonomy signals',
+  psych_safety: 'Psych safety language',
+  deep_work_possible: 'Deep work possible'
 };
 
 function fillClass(verdict) {
-  if (verdict.includes('Strong')) return 'fill-go';
+  if (verdict.includes('Friendly')) return 'fill-go';
   if (verdict.includes('Caution')) return 'fill-caution';
   return 'fill-no';
 }
 
 function verdictClass(verdict) {
-  if (verdict.includes('Strong')) return 'v-go';
+  if (verdict.includes('Friendly')) return 'v-go';
   if (verdict.includes('Caution')) return 'v-caution';
   return 'v-no';
 }
@@ -587,21 +503,15 @@ function scoreColor(score) {
 }
 
 function render(data) {
-  const labels = TEN_LABELS[mode];
   const fc = fillClass(data.verdict);
   const vc = verdictClass(data.verdict);
 
   let tenHtml = '';
   if (data.ten_second) {
     tenHtml = Object.entries(data.ten_second).map(([k, v]) => {
-      const label = labels[k] || k.replace(/_/g,' ');
+      const label = TEN_LABELS[k] || k.replace(/_/g,' ');
       return `<div class="check-item ${v ? 'chk-yes' : 'chk-no'}"><span>${v ? '✓' : '✗'}</span><span>${label}</span></div>`;
     }).join('');
-  }
-
-  let subHtml = '';
-  if (data.nd_score !== undefined) {
-    subHtml = `<div class="sub-scores"><div class="sub-score-item">ND sustainability: <strong>${data.nd_score}/100</strong></div><div class="sub-score-item">Role fit: <strong>${data.fit_score}/100</strong></div></div>`;
   }
 
   const makeSection = (dotCls, headCls, label, items) => {
@@ -624,13 +534,12 @@ function render(data) {
         <span class="score-denom">/ 100</span>
         <span class="verdict-pill ${vc}">${data.verdict}</span>
       </div>
-      ${subHtml}
       <div class="track"><div class="fill ${fc}" style="width:${data.score}%"></div></div>
       <p class="bottom-line">${data.bottom_line}</p>
     </div>
 
     ${tenHtml ? `<div class="section-card">
-      <div class="section-head c-neutral"><span class="dot dot-neutral"></span>10-second test</div>
+      <div class="section-head c-neutral"><span class="dot dot-neutral"></span>At a glance</div>
       <div class="ten-grid">${tenHtml}</div>
     </div>` : ''}
 
@@ -654,8 +563,6 @@ async function runEval() {
   document.getElementById('eval-btn').disabled = true;
   document.getElementById('loading').classList.add('on');
 
-  const systemMap = { nd: SYSTEM_ND, fit: SYSTEM_FIT, both: SYSTEM_BOTH };
-
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -663,7 +570,7 @@ async function runEval() {
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
-        system: systemMap[mode],
+        system: SYSTEM,
         messages: [{ role: 'user', content: `Evaluate this job description. Return ONLY valid JSON:\n\n${jd}` }]
       })
     });
