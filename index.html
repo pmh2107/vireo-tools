@@ -132,23 +132,24 @@ main {
 
 .how-toggle {
   width: 100%;
-  background: none;
+  background: var(--moss-dark);
   border: none;
   padding: 0.9rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
+  font-family: 'Cormorant Garant', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--linen);
   text-align: left;
+  border-radius: 8px;
 }
 
-.how-toggle:hover { color: var(--moss-dark); }
+.how-toggle:hover { background: #2a1629; }
+.how-toggle.open { border-radius: 8px 8px 0 0; }
 
 .how-toggle .arrow {
   font-size: 0.7rem;
