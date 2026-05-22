@@ -11,7 +11,7 @@
 :root {
   --linen: #d7d3c6;
   --moss: #606c4d;
-  --moss-dark: #454623;
+  --moss-dark: #373B2F;
   --ink: #48493d;
   --ink-muted: #65614e;
   --ink-faint: #9b9785;
@@ -132,24 +132,23 @@ main {
 
 .how-toggle {
   width: 100%;
-  background: var(--moss-dark);
+  background: none;
   border: none;
   padding: 0.9rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  font-family: 'Cormorant Garant', serif;
-  font-size: 1.15rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: var(--linen);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
   text-align: left;
-  border-radius: 8px;
 }
 
-.how-toggle:hover { background: #2a1629; }
-.how-toggle.open { border-radius: 8px 8px 0 0; }
+.how-toggle:hover { color: var(--moss-dark); }
 
 .how-toggle .arrow {
   font-size: 0.7rem;
@@ -464,16 +463,13 @@ footer a:hover { color: var(--plum); }
 <header>
   <div class="header-top">
     <div class="logo">
-      <img src="logo.png" alt="Vireo Coaching">
+      <img src="White_text_logo-removebg-preview.png" alt="Vireo Coaching">
     </div>
     
   </div>
   <h1>Job Description <em>Evaluator</em></h1>
   <div class="header-desc">
     <em>Built with ADHD in mind, useful for anyone whose brain doesn't love chaos.</em>
-    <p>Certain phrases tend to appear frequently in job descriptions for roles that ultimately become difficult to sustain for non-neurotypical brains. None of these phrases are inherently bad, but when they appear in clusters, they're worth pausing on. This filter flags language that may signal high cognitive load, unclear expectations, or environments where masking becomes a full-time job.</p>
-    <p>These aren't dealbreakers necessarily; they're data points to bear in mind.</p>
-    <p><a href="https://www.vireo-coaching.com/tldr-blog/burnoutflags" target="_blank">Smoke Signals: Spot Potential Burnout Before You Apply</a> describes the criteria in detail, along with clarifying questions to help you extract signal from noise.</p>
   </div>
 </header>
 
@@ -503,7 +499,7 @@ footer a:hover { color: var(--plum); }
   </div>
 
   <label class="input-label" for="jd">Paste job description</label>
-  <textarea id="jd" placeholder="Paste the full job description here — title, responsibilities, qualifications, etc."></textarea>
+  <textarea id="jd" placeholder="Paste the full job description here — title, responsibilities, qualifications, the works..."></textarea>
 
   <button class="run-btn" onclick="runEval()" id="eval-btn">Run JD Filter →</button>
 
