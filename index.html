@@ -10,7 +10,6 @@
 
 :root {
   --linen: #d7d3c6;
-  --linen-light: #eae7df;
   --moss: #606c4d;
   --moss-dark: #454623;
   --ink: #48493d;
@@ -61,7 +60,7 @@ header::after {
 }
 
 .logo img {
-  height: 52px;
+  height: 48px;
   display: block;
 }
 
@@ -70,7 +69,6 @@ header::after {
   color: rgba(215,211,198,0.6);
   text-decoration: none;
   letter-spacing: 0.06em;
-  font-weight: 400;
   transition: color 0.15s;
   white-space: nowrap;
 }
@@ -83,7 +81,7 @@ header h1 {
   font-weight: 300;
   line-height: 1.15;
   color: var(--linen);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
 }
 
 header h1 em {
@@ -95,8 +93,16 @@ header h1 em {
   font-size: 0.875rem;
   color: rgba(215,211,198,0.65);
   font-weight: 300;
-  line-height: 1.65;
-  max-width: 580px;
+  line-height: 1.7;
+  max-width: 100%;
+}
+
+.header-desc em {
+  font-style: italic;
+  color: rgba(215,211,198,0.5);
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.82rem;
 }
 
 .header-desc a {
@@ -107,10 +113,92 @@ header h1 em {
 
 .header-desc a:hover { color: var(--linen); }
 
+.header-desc p { margin-bottom: 0.6rem; }
+.header-desc p:last-child { margin-bottom: 0; }
+
 main {
   max-width: 760px;
   margin: 0 auto;
   padding: 2rem 1.5rem 2rem;
+}
+
+.how-it-works {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.how-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.9rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-align: left;
+}
+
+.how-toggle:hover { color: var(--moss-dark); }
+
+.how-toggle .arrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.how-toggle.open .arrow { transform: rotate(180deg); }
+
+.how-content {
+  display: none;
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.how-content.open { display: block; }
+
+.flag-list {
+  list-style: none;
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.flag-list li {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ink);
+  padding-left: 1rem;
+  position: relative;
+}
+
+.flag-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ink-faint);
+}
+
+.flag-list li strong { color: var(--red-signal); font-weight: 500; }
+.flag-list li.green strong { color: var(--green-signal); }
+
+.how-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
 }
 
 .input-label {
@@ -191,29 +279,6 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   text-underline-offset: 2px;
 }
 
-.loading {
-  display: none;
-  text-align: center;
-  padding: 2rem;
-  color: var(--ink-muted);
-  font-size: 0.875rem;
-}
-
-.loading.on { display: block; }
-
-.spinner {
-  display: inline-block;
-  width: 18px; height: 18px;
-  border: 2px solid var(--linen);
-  border-top-color: var(--moss);
-  border-radius: 50%;
-  animation: spin 0.75s linear infinite;
-  margin-right: 0.5rem;
-  vertical-align: middle;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
 .results { display: none; margin-top: 1.75rem; }
 .results.on { display: block; }
 
@@ -269,24 +334,18 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   margin-bottom: 1rem;
 }
 
-.fill {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 0.9s ease;
-}
-
+.fill { height: 100%; border-radius: 2px; }
 .fill-go { background: var(--moss); }
 .fill-caution { background: #c49a2a; }
 .fill-no { background: #c04040; }
 
 .bottom-line {
-  font-size: 0.9rem;
-  color: var(--ink-muted);
-  font-style: italic;
-  line-height: 1.65;
   font-family: 'Cormorant Garant', serif;
   font-size: 1.05rem;
   font-weight: 300;
+  font-style: italic;
+  color: var(--ink-muted);
+  line-height: 1.65;
 }
 
 .section-card {
@@ -308,12 +367,7 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   margin-bottom: 0.75rem;
 }
 
-.dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
+.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .dot-go { background: var(--moss); }
 .dot-caution { background: #c49a2a; }
 .dot-no { background: #c04040; }
@@ -364,21 +418,16 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 .chk-yes { color: var(--moss-dark); font-weight: 500; }
 .chk-no { color: #c04040; }
 
-.q-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
+.q-list { display: flex; flex-direction: column; gap: 0.4rem; }
 
 .q-item {
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.55;
   color: var(--ink);
   padding: 0.5rem 0.75rem;
   background: var(--surface-alt);
   border-radius: 6px;
   font-family: 'Cormorant Garant', serif;
-  font-size: 1rem;
   font-weight: 300;
   font-style: italic;
   border-left: 2px solid var(--plum-mid);
@@ -414,17 +463,46 @@ footer a:hover { color: var(--plum); }
 <header>
   <div class="header-top">
     <div class="logo">
-      <img src="logo.png" alt="Vireo Coaching">
+      <img src="White_text_logo-removebg-preview.png" alt="Vireo Coaching">
     </div>
     <a href="https://www.vireo-coaching.com" class="back-link" target="_blank">← Back to Vireo</a>
   </div>
   <h1>Job Description <em>Evaluator</em></h1>
-  <p class="header-desc">Certain phrases in job descriptions can signal how a workplace actually functions. This tool uses a filter to evaluate JDs by reading between the lines for whether the position and/or workplace may or may not be neurodiversity-friendly. <a href="https://www.vireo-coaching.com/tldr-blog/burnoutflags" target="_blank">Smoke Signals: Spot Potential Burnout Before You Apply</a> describes the criteria in detail.</p>
+  <div class="header-desc">
+    <em>Built with ADHD in mind, useful for anyone whose brain doesn't love chaos.</em>
+    <p>Certain phrases tend to appear frequently in job descriptions for roles that ultimately become difficult to sustain for non-neurotypical brains. None of these phrases are inherently bad, but when they appear in clusters, they're worth pausing on. This filter flags language that may signal high cognitive load, unclear expectations, or environments where masking becomes a full-time job.</p>
+    <p>These aren't dealbreakers necessarily; they're data points to bear in mind.</p>
+    <p><a href="https://www.vireo-coaching.com/tldr-blog/burnoutflags" target="_blank">Smoke Signals: Spot Potential Burnout Before You Apply</a> describes the criteria in detail, along with clarifying questions to help you extract signal from noise.</p>
+  </div>
 </header>
 
 <main>
+
+  <div class="how-it-works">
+    <button class="how-toggle" onclick="toggleHow(this)">
+      How this filter works <span class="arrow">▼</span>
+    </button>
+    <div class="how-content">
+      <p class="how-label">Red flag patterns</p>
+      <ul class="flag-list">
+        <li><strong>"Fast-paced environment"</strong> — frequent context-switching, unpredictable priorities, pile-ons</li>
+        <li><strong>"Wears many hats"</strong> — unclear role lanes, ill-defined responsibilities, understaffed teams</li>
+        <li><strong>Resilience / thick skin language</strong> — normalized pressure, high conflict, poor planning culture</li>
+        <li><strong>Vague responsibilities</strong> — unclear ownership, undefined success metrics</li>
+        <li><strong>"High visibility"</strong> — always-on culture, meeting overload, little protected focus time</li>
+        <li><strong>Heavy communication skills emphasis</strong> — informal politics, unspoken social dynamics</li>
+      </ul>
+      <p class="how-label">Green signals</p>
+      <ul class="flag-list">
+        <li class="green"><strong>Clear expectations</strong> — defined scope, explicit success metrics, structured onboarding</li>
+        <li class="green"><strong>Autonomy language</strong> — flexibility, trust, ownership of your work</li>
+        <li class="green"><strong>Psychological safety signals</strong> — mentorship culture, async communication, remote/flexible options</li>
+      </ul>
+    </div>
+  </div>
+
   <label class="input-label" for="jd">Paste job description</label>
-  <textarea id="jd" placeholder="Paste the full job description here — title, responsibilities, qualifications, etc."></textarea>
+  <textarea id="jd" placeholder="Paste the full job description here — title, responsibilities, qualifications, the works..."></textarea>
 
   <button class="run-btn" onclick="runEval()" id="eval-btn">Run JD Filter →</button>
 
@@ -433,9 +511,9 @@ footer a:hover { color: var(--plum); }
     <p>Coaching is a guided process that helps you uncover, hone, and use your individual strengths. <a href="https://www.vireo-coaching.com" target="_blank">Learn more at vireo-coaching.com.</a></p>
   </div>
 
-  <div class="loading" id="loading"><span class="spinner"></span> Reading the signals...</div>
   <div class="err" id="err"></div>
   <div class="results" id="results"></div>
+
 </main>
 
 <footer>
@@ -443,46 +521,167 @@ footer a:hover { color: var(--plum); }
 </footer>
 
 <script>
-const SYSTEM = `You are an expert evaluator of job descriptions for neurodivergent professionals, drawing on research about masking, burnout, psychological safety, and workplace sustainability.
-
-Evaluate using these red flag categories:
-1. "Fast-paced environment" — frequent priority shifts, context-switching, unpredictable pile-ons
-2. "Wears many hats" — unclear role lanes, ill-defined responsibilities, understaffed teams
-3. Resilience/thick skin emphasis — toxic pressure normalized, poor planning, high conflict
-4. Ambiguous role/responsibility descriptions — vague ownership, unclear success metrics
-5. "High visibility" — always-on culture, meeting overload, no deep work time
-6. Heavy communication skills emphasis — informal politics, unspoken social dynamics
-
-Green signals: clear expectations, defined scope, autonomy, psychological safety language, structured communication, explicit success metrics, flexible/remote work, mentorship culture, asynchronous communication options.
-
-Score guide: 75+ = Neurodiversity-Friendly, 50-74 = Proceed with Caution, below 50 = Significant Concerns.
-
-Return ONLY valid JSON with this exact structure (no markdown, no explanation):
-{
-  "score": <0-100>,
-  "verdict": <"Neurodiversity-Friendly" | "Proceed with Caution" | "Significant Concerns">,
-  "bottom_line": <1-2 sentences plain language summary>,
-  "red_flags": [<specific phrases found with brief explanation, quote the JD>],
-  "green_signals": [<positive signals found, quote the JD>],
-  "yellow_flags": [<things to probe in screening>],
-  "questions_to_ask": [<3-4 specific interview questions based on what was found>],
-  "ten_second": {
-    "clear_expectations": <true|false>,
-    "defined_scope": <true|false>,
-    "autonomy_signals": <true|false>,
-    "psych_safety": <true|false>,
-    "deep_work_possible": <true|false>
-  }
+function toggleHow(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
 }
-Quote actual JD phrases when flagging. Be specific and honest.`;
 
-const TEN_LABELS = {
-  clear_expectations: 'Clear expectations',
-  defined_scope: 'Defined scope',
-  autonomy_signals: 'Autonomy signals',
-  psych_safety: 'Psych safety language',
-  deep_work_possible: 'Deep work possible'
-};
+// Red flag patterns to search for
+const RED_FLAGS = [
+  {
+    id: 'fast_paced',
+    label: '"Fast-paced environment"',
+    explanation: 'suggests frequent context-switching and unpredictable priorities',
+    patterns: ['fast-paced', 'fast paced', 'rapidly changing', 'quickly changing', 'high velocity', 'moves fast', 'move fast', 'fast moving', 'fast-moving', 'dynamic environment', 'rapidly evolving']
+  },
+  {
+    id: 'many_hats',
+    label: '"Wears many hats"',
+    explanation: 'may indicate unclear role lanes or an understaffed team',
+    patterns: ['many hats', 'wear multiple hats', 'wears many hats', 'multiple responsibilities', 'scrappy', 'generalist', 'do it all', 'all hands on deck', 'startup environment', 'ambiguous', 'fluid role']
+  },
+  {
+    id: 'resilience',
+    label: 'Resilience / thick skin language',
+    explanation: 'signals normalized pressure and high-conflict culture',
+    patterns: ['resilient', 'resilience', 'thick skin', 'tough', 'grit', 'high pressure', 'high-pressure', 'demanding environment', 'works well under pressure', 'thrive under pressure', 'self-starter', 'driven']
+  },
+  {
+    id: 'vague',
+    label: 'Vague responsibilities',
+    explanation: 'unclear ownership and undefined success metrics',
+    patterns: ['as needed', 'other duties', 'ad hoc', 'wear many', 'various tasks', 'and more', 'etc.', 'among other things', 'and anything else', 'whatever it takes', 'roll up your sleeves']
+  },
+  {
+    id: 'visibility',
+    label: '"High visibility"',
+    explanation: 'may signal always-on culture with little protected focus time',
+    patterns: ['high visibility', 'high-visibility', 'highly visible', 'executive visibility', 'cross-functional visibility', 'always on', 'always-on', 'rapid response', 'quick turnaround', 'tight deadlines', 'fast turnaround']
+  },
+  {
+    id: 'comms',
+    label: 'Heavy communication skills emphasis',
+    explanation: 'may indicate informal politics and unspoken social dynamics',
+    patterns: ['strong communicator', 'excellent communication', 'exceptional communication', 'strong interpersonal', 'relationship builder', 'influence without authority', 'navigate ambiguity', 'politically savvy', 'stakeholder management', 'manage up']
+  }
+];
+
+const GREEN_SIGNALS = [
+  { label: 'Clear success metrics', patterns: ['success metrics', 'clear expectations', '30/60/90', 'defined goals', 'measurable outcomes', 'kpis defined', 'clear objectives'] },
+  { label: 'Flexible / remote work', patterns: ['remote', 'work from home', 'flexible hours', 'hybrid', 'async', 'asynchronous', 'flexible schedule', 'work-life balance'] },
+  { label: 'Autonomy & ownership', patterns: ['autonomy', 'ownership', 'independent', 'self-directed', 'trust', 'empowered', 'own your work'] },
+  { label: 'Psychological safety language', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'mentorship', 'growth mindset'] },
+  { label: 'Structured communication', patterns: ['structured', 'clear communication', 'transparent', 'documentation', 'well-documented', 'async communication', 'written communication'] },
+  { label: 'Defined scope', patterns: ['defined scope', 'clear role', 'clear responsibilities', 'well-defined', 'scoped', 'focused role'] }
+];
+
+const TEN_SECOND = [
+  { key: 'clear_expectations', label: 'Clear expectations', greenPatterns: ['clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable'], redPatterns: ['ambiguous', 'evolving', 'fluid', 'as needed'] },
+  { key: 'defined_scope', label: 'Defined scope', greenPatterns: ['defined scope', 'focused role', 'clear responsibilities', 'well-defined'], redPatterns: ['many hats', 'generalist', 'various', 'other duties'] },
+  { key: 'autonomy_signals', label: 'Autonomy signals', greenPatterns: ['autonomy', 'ownership', 'independent', 'self-directed', 'trust', 'empowered'], redPatterns: ['manage up', 'executive visibility', 'constant communication'] },
+  { key: 'psych_safety', label: 'Psych safety language', greenPatterns: ['psychological safety', 'inclusive', 'belonging', 'mentorship', 'safe', 'diverse'], redPatterns: ['thick skin', 'resilience', 'grit', 'high pressure'] },
+  { key: 'deep_work_possible', label: 'Deep work possible', greenPatterns: ['focused', 'async', 'asynchronous', 'flexible', 'remote', 'independent'], redPatterns: ['always on', 'rapid response', 'quick turnaround', 'high visibility', 'fast turnaround'] }
+];
+
+function normalize(text) {
+  return text.toLowerCase();
+}
+
+function findMatches(text, patterns) {
+  const norm = normalize(text);
+  return patterns.filter(p => norm.includes(p.toLowerCase()));
+}
+
+function scoreJD(text) {
+  let score = 70; // start neutral-positive
+  const redFound = [];
+  const greenFound = [];
+  const yellowFound = [];
+
+  // Check red flags
+  RED_FLAGS.forEach(flag => {
+    const matches = findMatches(text, flag.patterns);
+    if (matches.length > 0) {
+      redFound.push(`${flag.label} — ${flag.explanation} (found: "${matches[0]}")`);
+      score -= 12;
+    }
+  });
+
+  // Check green signals
+  GREEN_SIGNALS.forEach(signal => {
+    const matches = findMatches(text, signal.patterns);
+    if (matches.length > 0) {
+      greenFound.push(`${signal.label} (found: "${matches[0]}")`);
+      score += 6;
+    }
+  });
+
+  // Cap score
+  score = Math.max(5, Math.min(98, score));
+
+  // Yellow flags — things present that need probing
+  if (findMatches(text, ['cross-functional', 'cross functional']).length > 0 && redFound.length > 1) {
+    yellowFound.push('Cross-functional role — worth clarifying who owns what and how conflict is resolved');
+  }
+  if (findMatches(text, ['startup', 'early stage', 'early-stage', 'series a', 'series b']).length > 0) {
+    yellowFound.push('Startup environment — ask about prioritization process and how scope is managed');
+  }
+  if (findMatches(text, ['ai', 'artificial intelligence', 'machine learning']).length > 0 && greenFound.length < 2) {
+    yellowFound.push('AI/tech buzzwords present — ask how these tools are actually used day-to-day');
+  }
+  if (findMatches(text, ['client', 'clients', 'customer facing', 'customer-facing']).length > 0) {
+    yellowFound.push('Client-facing language — clarify volume of client interactions and context-switching expectations');
+  }
+
+  // Ten second checks
+  const tenSecond = {};
+  TEN_SECOND.forEach(item => {
+    const greenHits = findMatches(text, item.greenPatterns).length;
+    const redHits = findMatches(text, item.redPatterns).length;
+    tenSecond[item.key] = greenHits > redHits;
+  });
+
+  // Verdict
+  let verdict, bottomLine;
+  if (score >= 72) {
+    verdict = 'Neurodiversity-Friendly';
+    bottomLine = 'This role shows positive signals for a sustainable, structured work environment. Worth pursuing — use the questions below to confirm fit.';
+  } else if (score >= 48) {
+    verdict = 'Proceed with Caution';
+    bottomLine = 'This role has a mixed profile. Some flags worth probing in screening — the questions below can help you extract signal from noise before committing.';
+  } else {
+    verdict = 'Significant Concerns';
+    bottomLine = 'This role contains several patterns that tend to correlate with high cognitive load and burnout risk for neurodivergent professionals. Proceed carefully, or use the questions below to challenge your assumptions before applying.';
+  }
+
+  // Generate questions based on what was found
+  const questions = [];
+  if (redFound.some(r => r.includes('Fast-paced'))) {
+    questions.push('How are competing priorities typically handled when multiple things are urgent simultaneously?');
+  }
+  if (redFound.some(r => r.includes('many hats'))) {
+    questions.push('Can you walk me through what a typical week looks like in this role — what does the balance of responsibilities actually look like day to day?');
+  }
+  if (redFound.some(r => r.includes('Resilience'))) {
+    questions.push('How does the team handle it when someone is overwhelmed or needs to reprioritize?');
+  }
+  if (redFound.some(r => r.includes('High visibility'))) {
+    questions.push('How much protected heads-down time does someone in this role typically have in a week?');
+  }
+  if (redFound.some(r => r.includes('communication'))) {
+    questions.push('How are decisions typically made and communicated — is there a formal process, or does it tend to happen informally?');
+  }
+  if (tenSecond.clear_expectations === false) {
+    questions.push('What does success look like in the first 90 days, and how is it measured?');
+  }
+  if (questions.length === 0) {
+    questions.push('What does success look like in the first 90 days?');
+    questions.push('How does the team communicate — what\'s the balance of async vs real-time?');
+    questions.push('How are priorities set when multiple things feel urgent?');
+  }
+
+  return { score, verdict, bottomLine, redFound, greenFound, yellowFound, tenSecond, questions };
+}
 
 function fillClass(verdict) {
   if (verdict.includes('Friendly')) return 'fill-go';
@@ -497,34 +696,31 @@ function verdictClass(verdict) {
 }
 
 function scoreColor(score) {
-  if (score >= 70) return '#454623';
-  if (score >= 45) return '#7a5c1e';
+  if (score >= 72) return '#454623';
+  if (score >= 48) return '#7a5c1e';
   return '#7a2e2e';
+}
+
+function makeSection(dotCls, headCls, label, items) {
+  if (!items || !items.length) return '';
+  return `<div class="section-card">
+    <div class="section-head ${headCls}"><span class="dot ${dotCls}"></span>${label}</div>
+    <ul class="finding-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>
+  </div>`;
 }
 
 function render(data) {
   const fc = fillClass(data.verdict);
   const vc = verdictClass(data.verdict);
 
-  let tenHtml = '';
-  if (data.ten_second) {
-    tenHtml = Object.entries(data.ten_second).map(([k, v]) => {
-      const label = TEN_LABELS[k] || k.replace(/_/g,' ');
-      return `<div class="check-item ${v ? 'chk-yes' : 'chk-no'}"><span>${v ? '✓' : '✗'}</span><span>${label}</span></div>`;
-    }).join('');
-  }
+  const tenHtml = TEN_SECOND.map(item => {
+    const val = data.tenSecond[item.key];
+    return `<div class="check-item ${val ? 'chk-yes' : 'chk-no'}"><span>${val ? '✓' : '✗'}</span><span>${item.label}</span></div>`;
+  }).join('');
 
-  const makeSection = (dotCls, headCls, label, items) => {
-    if (!items || !items.length) return '';
-    return `<div class="section-card">
-      <div class="section-head ${headCls}"><span class="dot ${dotCls}"></span>${label}</div>
-      <ul class="finding-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>
-    </div>`;
-  };
-
-  const qSection = data.questions_to_ask && data.questions_to_ask.length ? `<div class="section-card">
+  const qSection = data.questions.length ? `<div class="section-card">
     <div class="section-head c-plum"><span class="dot dot-plum"></span>Questions to ask in screening</div>
-    <div class="q-list">${data.questions_to_ask.map(q => `<div class="q-item">"${q}"</div>`).join('')}</div>
+    <div class="q-list">${data.questions.map(q => `<div class="q-item">"${q}"</div>`).join('')}</div>
   </div>` : '';
 
   document.getElementById('results').innerHTML = `
@@ -535,63 +731,40 @@ function render(data) {
         <span class="verdict-pill ${vc}">${data.verdict}</span>
       </div>
       <div class="track"><div class="fill ${fc}" style="width:${data.score}%"></div></div>
-      <p class="bottom-line">${data.bottom_line}</p>
+      <p class="bottom-line">${data.bottomLine}</p>
     </div>
 
-    ${tenHtml ? `<div class="section-card">
+    <div class="section-card">
       <div class="section-head c-neutral"><span class="dot dot-neutral"></span>At a glance</div>
       <div class="ten-grid">${tenHtml}</div>
-    </div>` : ''}
+    </div>
 
-    ${makeSection('dot-go','c-go','Green signals', data.green_signals)}
-    ${makeSection('dot-no','c-no','Red flags', data.red_flags)}
-    ${makeSection('dot-caution','c-caution','Proceed with caution — validate in screening', data.yellow_flags)}
+    ${makeSection('dot-go', 'c-go', 'Green signals', data.greenFound)}
+    ${makeSection('dot-no', 'c-no', 'Red flags', data.redFound)}
+    ${makeSection('dot-caution', 'c-caution', 'Proceed with caution — validate in screening', data.yellowFound)}
     ${qSection}
   `;
+
+  document.getElementById('results').classList.add('on');
 }
 
-async function runEval() {
+function runEval() {
   const jd = document.getElementById('jd').value.trim();
   if (!jd) {
     document.getElementById('err').textContent = 'Please paste a job description first.';
     document.getElementById('err').classList.add('on');
     return;
   }
-
   document.getElementById('err').classList.remove('on');
   document.getElementById('results').classList.remove('on');
-  document.getElementById('eval-btn').disabled = true;
-  document.getElementById('loading').classList.add('on');
 
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM,
-        messages: [{ role: 'user', content: `Evaluate this job description. Return ONLY valid JSON:\n\n${jd}` }]
-      })
-    });
+  const data = scoreJD(jd);
+  render(data);
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error?.message || 'API error');
-
-    const text = data.content[0].text.trim().replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(text);
-
-    document.getElementById('loading').classList.remove('on');
-    document.getElementById('results').classList.add('on');
-    render(parsed);
-
-  } catch (e) {
-    document.getElementById('loading').classList.remove('on');
-    document.getElementById('err').textContent = `Something went wrong: ${e.message}`;
-    document.getElementById('err').classList.add('on');
-  } finally {
-    document.getElementById('eval-btn').disabled = false;
-  }
+  // Scroll to results
+  setTimeout(() => {
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
 }
 </script>
 </body>
