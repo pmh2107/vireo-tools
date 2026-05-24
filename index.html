@@ -59,21 +59,7 @@ header::after {
   margin-bottom: 1.25rem;
 }
 
-.logo img {
-  height: 48px;
-  display: block;
-}
-
-.back-link {
-  font-size: 0.78rem;
-  color: rgba(215,211,198,0.6);
-  text-decoration: none;
-  letter-spacing: 0.06em;
-  transition: color 0.15s;
-  white-space: nowrap;
-}
-
-.back-link:hover { color: var(--linen); }
+.logo img { height: 48px; display: block; }
 
 header h1 {
   font-family: 'Cormorant Garant', serif;
@@ -84,10 +70,7 @@ header h1 {
   margin-bottom: 0.75rem;
 }
 
-header h1 em {
-  font-style: italic;
-  color: #c4b8c6;
-}
+header h1 em { font-style: italic; color: #c4b8c6; }
 
 .header-desc {
   font-size: 0.875rem;
@@ -112,7 +95,6 @@ header h1 em {
 }
 
 .header-desc a:hover { color: var(--linen); }
-
 .header-desc p { margin-bottom: 0.6rem; }
 .header-desc p:last-child { margin-bottom: 0; }
 
@@ -146,6 +128,7 @@ main {
   text-transform: uppercase;
   color: var(--linen);
   border-radius: 8px;
+  gap: 0.5rem;
 }
 
 .how-toggle:hover { background: #2a1629; }
@@ -160,25 +143,63 @@ main {
 
 .how-content {
   display: none;
-  padding: 0 1.25rem 1.25rem;
+  padding: 1.25rem 1.5rem;
   border-top: 1px solid var(--border);
 }
 
 .how-content.open { display: block; }
 
+.dimension {
+  margin-bottom: 1.25rem;
+}
+
+.dimension:last-child { margin-bottom: 0; }
+
+.dimension-title {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.flag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 560px) {
+  .flag-grid { grid-template-columns: 1fr; }
+}
+
+.flag-col-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.flag-col-label.green { color: var(--green-signal); }
+.flag-col-label.red { color: var(--red-signal); }
+
 .flag-list {
   list-style: none;
-  margin: 0.75rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.3rem;
 }
 
 .flag-list li {
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.8rem;
+  line-height: 1.45;
   color: var(--ink);
-  padding-left: 1rem;
+  padding-left: 0.9rem;
   position: relative;
 }
 
@@ -187,19 +208,6 @@ main {
   position: absolute;
   left: 0;
   color: var(--ink-faint);
-}
-
-.flag-list li strong { color: var(--red-signal); font-weight: 500; }
-.flag-list li.green strong { color: var(--green-signal); }
-
-.how-label {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
-  margin-top: 0.75rem;
-  margin-bottom: 0.25rem;
 }
 
 .input-label {
@@ -250,37 +258,6 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 .run-btn:hover { background: #2a1629; }
 .run-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-.about-vireo {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  border-left: 3px solid var(--moss);
-  background: var(--white);
-  border-radius: 0 8px 8px 0;
-}
-
-.about-vireo h3 {
-  font-family: 'Cormorant Garant', serif;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--moss-dark);
-  margin-bottom: 0.4rem;
-}
-
-.about-vireo p {
-  font-size: 0.875rem;
-  color: var(--ink-muted);
-  line-height: 1.65;
-  font-weight: 300;
-}
-
-.about-vireo a {
-  color: var(--moss);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
 .results { display: none; margin-top: 1.75rem; }
 .results.on { display: block; }
 
@@ -307,11 +284,7 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   font-weight: 300;
 }
 
-.score-denom {
-  font-size: 1rem;
-  color: var(--ink-muted);
-  font-weight: 300;
-}
+.score-denom { font-size: 1rem; color: var(--ink-muted); font-weight: 300; }
 
 .verdict-pill {
   display: inline-block;
@@ -348,6 +321,35 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   font-style: italic;
   color: var(--ink-muted);
   line-height: 1.65;
+}
+
+.dim-scores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.dim-score-item {
+  background: var(--surface-alt);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+}
+
+.dim-score-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.2rem;
+}
+
+.dim-score-val {
+  font-family: 'Cormorant Garant', serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1;
 }
 
 .section-card {
@@ -446,18 +448,6 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 }
 
 .err.on { display: block; }
-
-footer {
-  text-align: center;
-  padding: 1.5rem 1.5rem 2.5rem;
-  font-size: 0.72rem;
-  color: var(--ink-faint);
-  border-top: 1px solid var(--border);
-  margin-top: 2rem;
-}
-
-footer a { color: var(--ink-muted); text-decoration: none; }
-footer a:hover { color: var(--plum); }
 </style>
 </head>
 <body>
@@ -467,7 +457,6 @@ footer a:hover { color: var(--plum); }
     <div class="logo">
       <img src="logo.png" alt="Vireo Coaching">
     </div>
-    
   </div>
   <h1>Job Description <em>Evaluator</em></h1>
   <div class="header-desc">
@@ -476,27 +465,122 @@ footer a:hover { color: var(--plum); }
 </header>
 
 <main>
-
   <div class="how-it-works">
     <button class="how-toggle" onclick="toggleHow(this)">
       How This Filter Works <span class="arrow">▼</span>
     </button>
     <div class="how-content">
-      <p class="how-label">Red flag patterns</p>
-      <ul class="flag-list">
-        <li><strong>"Fast-paced environment"</strong> — frequent context-switching, unpredictable priorities, pile-ons</li>
-        <li><strong>"Wears many hats"</strong> — unclear role lanes, ill-defined responsibilities, understaffed teams</li>
-        <li><strong>Resilience / thick skin language</strong> — normalized pressure, high conflict, poor planning culture</li>
-        <li><strong>Vague responsibilities</strong> — unclear ownership, undefined success metrics</li>
-        <li><strong>"High visibility"</strong> — always-on culture, meeting overload, little protected focus time</li>
-        <li><strong>Heavy communication skills emphasis</strong> — informal politics, unspoken social dynamics</li>
-      </ul>
-      <p class="how-label">Green signals</p>
-      <ul class="flag-list">
-        <li class="green"><strong>Clear expectations</strong> — defined scope, explicit success metrics, structured onboarding</li>
-        <li class="green"><strong>Autonomy language</strong> — flexibility, trust, ownership of your work</li>
-        <li class="green"><strong>Psychological safety signals</strong> — mentorship culture, async communication, remote/flexible options</li>
-      </ul>
+      <p style="font-size:0.85rem;color:var(--ink-muted);margin-bottom:1rem;line-height:1.6;">This filter evaluates job descriptions across four dimensions that affect how neurodivergent brains interact with work environments. No diagnosis required — these signals matter for anyone whose brain doesn't love chaos.</p>
+
+      <div class="dimension">
+        <div class="dimension-title">1. Cognition — does the work reward how your brain processes information?</div>
+        <div class="flag-grid">
+          <div>
+            <div class="flag-col-label green">Green signals</div>
+            <ul class="flag-list">
+              <li>Pattern recognition / synthesis valued</li>
+              <li>Complex, ambiguous problem spaces</li>
+              <li>Results matter more than performance style</li>
+              <li>"Build from the ground up" / "greenfield"</li>
+              <li>Independent thinking / "constructive challenge"</li>
+              <li>Deep expertise development possible</li>
+            </ul>
+          </div>
+          <div>
+            <div class="flag-col-label red">Red flags</div>
+            <ul class="flag-list">
+              <li>Rigid procedural execution</li>
+              <li>"Strict adherence" / "process compliance"</li>
+              <li>Repetitive operational work</li>
+              <li>"Dashboard" / "reporting maintenance"</li>
+              <li>Output volume over insight quality</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="dimension">
+        <div class="dimension-title">2. Energy regulation — does the environment support sustainable functioning?</div>
+        <div class="flag-grid">
+          <div>
+            <div class="flag-col-label green">Green signals</div>
+            <ul class="flag-list">
+              <li>Remote / flexible / async options</li>
+              <li>Flexible hours</li>
+              <li>Protected focus / deep work time</li>
+              <li>Quiet spaces / sensory considerations</li>
+              <li>Reasonable meeting load</li>
+              <li>Scheduled breaks / sustainable pace</li>
+            </ul>
+          </div>
+          <div>
+            <div class="flag-col-label red">Red flags</div>
+            <ul class="flag-list">
+              <li>"Always on" / immediate response culture</li>
+              <li>Open plan / hotdesking environment</li>
+              <li>Excessive meetings / "alignment" culture</li>
+              <li>Heavy context switching</li>
+              <li>Constant social performance required</li>
+              <li>Sensory-hostile environment signals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="dimension">
+        <div class="dimension-title">3. Ambiguity — what kind of ambiguity is present?</div>
+        <div class="flag-grid">
+          <div>
+            <div class="flag-col-label green">Green signals</div>
+            <ul class="flag-list">
+              <li>Ambiguous problem spaces (good)</li>
+              <li>Complex, undefined challenges</li>
+              <li>"Synthesize" / "make sense of"</li>
+              <li>Proactive / strategic framing</li>
+            </ul>
+          </div>
+          <div>
+            <div class="flag-col-label red">Red flags</div>
+            <ul class="flag-list">
+              <li>Role / expectation ambiguity (bad)</li>
+              <li>Hidden rules / unwritten expectations</li>
+              <li>Shifting priorities without rationale</li>
+              <li>"Role will evolve" / "responsibilities may shift"</li>
+              <li>No feedback structure mentioned</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="dimension">
+        <div class="dimension-title">4. Organizational psychology — does the culture reward competence and intellectual honesty?</div>
+        <div class="flag-grid">
+          <div>
+            <div class="flag-col-label green">Green signals</div>
+            <ul class="flag-list">
+              <li>Psychological safety language</li>
+              <li>Written / explicit communication culture</li>
+              <li>Regular structured feedback / check-ins</li>
+              <li>Mentorship / support culture</li>
+              <li>Visible impact / work affects decisions</li>
+              <li>"Different perspectives" / "independent thinkers"</li>
+              <li>Neurodiversity / DEI awareness signals</li>
+            </ul>
+          </div>
+          <div>
+            <div class="flag-col-label red">Red flags</div>
+            <ul class="flag-list">
+              <li>"Culture fit" without specifics</li>
+              <li>Heavy political navigation required</li>
+              <li>"Manage up" / "influence without authority"</li>
+              <li>Insights with no visible influence</li>
+              <li>Micromanagement signals</li>
+              <li>Performance theater / optics over outcomes</li>
+              <li>Hidden curriculum / unwritten rules culture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -505,14 +589,9 @@ footer a:hover { color: var(--plum); }
 
   <button class="run-btn" onclick="runEval()" id="eval-btn">Run JD Filter →</button>
 
-  
-
   <div class="err" id="err"></div>
   <div class="results" id="results"></div>
-
 </main>
-
-
 
 <script>
 function toggleHow(btn) {
@@ -520,161 +599,190 @@ function toggleHow(btn) {
   btn.nextElementSibling.classList.toggle('open');
 }
 
-// Red flag patterns to search for
-const RED_FLAGS = [
-  {
-    id: 'fast_paced',
-    label: '"Fast-paced environment"',
-    explanation: 'suggests frequent context-switching and unpredictable priorities',
-    patterns: ['fast-paced', 'fast paced', 'rapidly changing', 'quickly changing', 'high velocity', 'moves fast', 'move fast', 'fast moving', 'fast-moving', 'dynamic environment', 'rapidly evolving']
-  },
-  {
-    id: 'many_hats',
-    label: '"Wears many hats"',
-    explanation: 'may indicate unclear role lanes or an understaffed team',
-    patterns: ['many hats', 'wear multiple hats', 'wears many hats', 'multiple responsibilities', 'scrappy', 'generalist', 'do it all', 'all hands on deck', 'startup environment', 'ambiguous', 'fluid role']
-  },
-  {
-    id: 'resilience',
-    label: 'Resilience / thick skin language',
-    explanation: 'signals normalized pressure and high-conflict culture',
-    patterns: ['resilient', 'resilience', 'thick skin', 'tough', 'grit', 'high pressure', 'high-pressure', 'demanding environment', 'works well under pressure', 'thrive under pressure', 'self-starter', 'driven']
-  },
-  {
-    id: 'vague',
-    label: 'Vague responsibilities',
-    explanation: 'unclear ownership and undefined success metrics',
-    patterns: ['as needed', 'other duties', 'ad hoc', 'wear many', 'various tasks', 'and more', 'etc.', 'among other things', 'and anything else', 'whatever it takes', 'roll up your sleeves']
-  },
-  {
-    id: 'visibility',
-    label: '"High visibility"',
-    explanation: 'may signal always-on culture with little protected focus time',
-    patterns: ['high visibility', 'high-visibility', 'highly visible', 'executive visibility', 'cross-functional visibility', 'always on', 'always-on', 'rapid response', 'quick turnaround', 'tight deadlines', 'fast turnaround']
-  },
-  {
-    id: 'comms',
-    label: 'Heavy communication skills emphasis',
-    explanation: 'may indicate informal politics and unspoken social dynamics',
-    patterns: ['strong communicator', 'excellent communication', 'exceptional communication', 'strong interpersonal', 'relationship builder', 'influence without authority', 'navigate ambiguity', 'politically savvy', 'stakeholder management', 'manage up']
-  }
+// ── DIMENSION 1: COGNITION ──────────────────────────────────────────────────
+const COGNITION_GREEN = [
+  { label: 'Pattern recognition / synthesis valued', patterns: ['pattern recognition', 'synthesize', 'synthesis', 'systems thinking', 'make sense of', 'connect the dots', 'build from the ground up', 'greenfield', 'shape the function', 'center of excellence', 'strategic intelligence', 'turn insights into action', 'independent thinkers', 'constructive challenge', 'different perspectives', 'intellectual curiosity'] },
+  { label: 'Results-oriented culture', patterns: ['results-oriented', 'outcomes-focused', 'impact-driven', 'mission-driven', 'purpose-driven', 'output matters', 'your work will', 'decisions informed by'] },
+  { label: 'Deep expertise / ownership', patterns: ['end-to-end', 'ownership', 'run with it', 'lead the', 'own the', 'subject matter expert', 'deep expertise', 'thought leader'] }
 ];
 
-const GREEN_SIGNALS = [
-  { label: 'Clear success metrics', patterns: ['success metrics', 'clear expectations', '30/60/90', 'defined goals', 'measurable outcomes', 'kpis defined', 'clear objectives'] },
-  { label: 'Flexible / remote work', patterns: ['remote', 'work from home', 'flexible hours', 'hybrid', 'async', 'asynchronous', 'flexible schedule', 'work-life balance'] },
-  { label: 'Autonomy & ownership', patterns: ['autonomy', 'ownership', 'independent', 'self-directed', 'trust', 'empowered', 'own your work'] },
-  { label: 'Psychological safety language', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'mentorship', 'growth mindset'] },
-  { label: 'Structured communication', patterns: ['structured', 'clear communication', 'transparent', 'documentation', 'well-documented', 'async communication', 'written communication'] },
-  { label: 'Defined scope', patterns: ['defined scope', 'clear role', 'clear responsibilities', 'well-defined', 'scoped', 'focused role'] }
+const COGNITION_RED = [
+  { label: 'Rigid procedural execution', patterns: ['strict adherence', 'process compliance', 'execution against', 'predefined workflows', 'follow established', 'standardized processes', 'chain of command'] },
+  { label: 'Repetitive operational work', patterns: ['dashboard', 'reporting maintenance', 'data entry', 'maintain reports', 'update dashboards', 'weekly reports', 'utilization', 'velocity targets', 'throughput'] }
 ];
 
-const TEN_SECOND = [
-  { key: 'clear_expectations', label: 'Clear expectations', greenPatterns: ['clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable'], redPatterns: ['ambiguous', 'evolving', 'fluid', 'as needed'] },
-  { key: 'defined_scope', label: 'Defined scope', greenPatterns: ['defined scope', 'focused role', 'clear responsibilities', 'well-defined'], redPatterns: ['many hats', 'generalist', 'various', 'other duties'] },
-  { key: 'autonomy_signals', label: 'Autonomy signals', greenPatterns: ['autonomy', 'ownership', 'independent', 'self-directed', 'trust', 'empowered'], redPatterns: ['manage up', 'executive visibility', 'constant communication'] },
-  { key: 'psych_safety', label: 'Psych safety language', greenPatterns: ['psychological safety', 'inclusive', 'belonging', 'mentorship', 'safe', 'diverse'], redPatterns: ['thick skin', 'resilience', 'grit', 'high pressure'] },
-  { key: 'deep_work_possible', label: 'Deep work possible', greenPatterns: ['focused', 'async', 'asynchronous', 'flexible', 'remote', 'independent'], redPatterns: ['always on', 'rapid response', 'quick turnaround', 'high visibility', 'fast turnaround'] }
+// ── DIMENSION 2: ENERGY REGULATION ─────────────────────────────────────────
+const ENERGY_GREEN = [
+  { label: 'Flexible / remote / async options', patterns: ['remote', 'work from home', 'flexible hours', 'hybrid', 'async', 'asynchronous', 'flexible schedule', 'work-life balance', 'flexible start', 'quiet space', 'sensory', 'noise-cancelling', 'adjustable lighting'] },
+  { label: 'Protected focus time', patterns: ['deep work', 'focused work', 'uninterrupted', 'heads-down', 'protected time', 'independent work', 'autonomous'] },
+  { label: 'Structured / sustainable pace', patterns: ['sustainable', 'structured onboarding', 'regular check-ins', 'scheduled breaks', 'reasonable hours', 'work-life', 'mentorship', 'support structure'] }
 ];
 
-function normalize(text) {
-  return text.toLowerCase();
-}
+const ENERGY_RED = [
+  { label: '"Always on" culture', patterns: ['always on', 'always-on', 'rapid response', 'immediate response', 'quick turnaround', 'tight deadlines', 'fast turnaround', '24/7', 'on call'] },
+  { label: 'Open plan / sensory-hostile environment', patterns: ['open plan', 'open office', 'open-plan', 'hotdesking', 'hot desking', 'collaborative office', 'bustling office'] },
+  { label: 'Excessive meetings / coordination', patterns: ['alignment meetings', 'status updates', 'constant communication', 'highly collaborative', 'meeting-heavy', 'many stakeholders', 'lots of meetings'] },
+  { label: 'Heavy context switching', patterns: ['juggling', 'context switching', 'multiple projects simultaneously', 'switching between', 'many priorities at once'] }
+];
+
+// ── DIMENSION 3: AMBIGUITY ──────────────────────────────────────────────────
+const AMBIGUITY_GREEN = [
+  { label: 'Conceptual / problem ambiguity (good)', patterns: ['complex problems', 'ambiguous problems', 'undefined challenges', 'make sense of', 'synthesize', 'proactive', 'strategic', 'messy data', 'noisy data', 'greenfield', 'build from scratch'] }
+];
+
+const AMBIGUITY_RED = [
+  { label: 'Role / expectation ambiguity (bad)', patterns: ['role will evolve', 'responsibilities may shift', 'ambiguous expectations', 'ambiguous responsibilities', 'wear many hats', 'many hats', 'wear multiple hats', 'startup culture', 'startup environment', 'juggling', 'scrappy', 'do it all', 'all hands on deck', 'as needed', 'other duties', 'ad hoc', 'various tasks', 'whatever it takes', 'roll up your sleeves', 'fluid role'] },
+  { label: 'Hidden rules / unwritten expectations', patterns: ['hidden curriculum', 'unwritten rules', 'read the room', 'politically savvy', 'navigate the organization', 'informal influence', 'influence without authority', 'manage up'] }
+];
+
+// ── DIMENSION 4: ORGANIZATIONAL PSYCHOLOGY ─────────────────────────────────
+const ORGPSYCH_GREEN = [
+  { label: 'Psychological safety language', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'growth mindset', 'neurodiversity', 'neuroinclusive', 'disability', 'accommodations'] },
+  { label: 'Explicit communication culture', patterns: ['written communication', 'clear communication', 'transparent', 'documentation', 'well-documented', 'async communication', 'clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable outcomes', 'clear instructions', 'written instructions'] },
+  { label: 'Structured feedback / support', patterns: ['regular feedback', 'structured feedback', 'one-on-one', '1:1', 'mentorship', 'mentor', 'coaching', 'support structure', 'regular check-ins', 'onboarding'] },
+  { label: 'Visible impact / decisions', patterns: ['decision support', 'informs strategy', 'informs decisions', 'shapes strategy', 'executive storytelling', 'advisory', 'insights that drive', 'research that influences', 'your work will'] }
+];
+
+const ORGPSYCH_RED = [
+  { label: '"Culture fit" without specifics', patterns: ['culture fit', 'fits our culture', 'culture add'] },
+  { label: 'Political navigation required', patterns: ['politically savvy', 'navigate ambiguity', 'manage up', 'executive visibility', 'highly political', 'stakeholder management', 'influence without authority'] },
+  { label: 'Performance theater / optics', patterns: ['executive presence', 'polished', 'high polish', 'presenteeism', 'visibility', 'always visible', 'always present'] },
+  { label: 'Insights without influence', patterns: ['support function', 'reporting function', 'no seat at the table', 'buried in', 'deliverables without'] }
+];
+
+// ── YELLOW FLAGS ────────────────────────────────────────────────────────────
+const YELLOW_FLAGS = [
+  { label: '"Fast-paced" — ask what actually creates urgency', patterns: ['fast-paced', 'fast paced', 'rapidly changing', 'high velocity', 'moves fast', 'fast moving', 'dynamic environment', 'rapidly evolving'] },
+  { label: '"Self-starter" — ask about support structures and onboarding', patterns: ['self-starter', 'self-motivated', 'self-directed', 'driven'] },
+  { label: 'Cross-functional role — clarify ownership and conflict resolution', patterns: ['cross-functional', 'cross functional'] },
+  { label: '"High visibility" — clarify whether strategic or performative', patterns: ['high visibility', 'high-visibility', 'highly visible'] },
+  { label: 'Client-facing language — ask about volume and context-switching', patterns: ['client-facing', 'customer-facing', 'client management', 'multiple clients'] },
+  { label: 'Resilience language — ask what creates pressure', patterns: ['resilient', 'resilience', 'thick skin', 'grit', 'high pressure', 'high-pressure', 'demanding environment', 'thrive under pressure'] }
+];
+
+// ── AT A GLANCE ─────────────────────────────────────────────────────────────
+const AT_A_GLANCE = [
+  { key: 'clear_expectations', label: 'Clear expectations', greenPatterns: ['clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable', 'clear instructions'], redPatterns: ['role will evolve', 'fluid', 'as needed', 'other duties'] },
+  { key: 'deep_work_possible', label: 'Deep work possible', greenPatterns: ['async', 'remote', 'flexible', 'independent', 'focused', 'heads-down'], redPatterns: ['always on', 'rapid response', 'open plan', 'constant communication', 'many meetings'] },
+  { key: 'psych_safety', label: 'Psych safety signals', greenPatterns: ['psychological safety', 'inclusive', 'belonging', 'mentorship', 'diverse perspectives', 'neurodiversity'], redPatterns: ['thick skin', 'resilience', 'culture fit', 'high pressure'] },
+  { key: 'explicit_comms', label: 'Explicit communication', greenPatterns: ['written communication', 'documented', 'transparent', 'clear instructions', 'async communication'], redPatterns: ['read the room', 'politically savvy', 'hidden', 'informal'] },
+  { key: 'visible_impact', label: 'Visible impact', greenPatterns: ['decision support', 'informs strategy', 'shapes direction', 'advisory', 'your work will', 'insights that drive'], redPatterns: ['support function', 'reporting only', 'deliverables'] }
+];
+
+function normalize(text) { return text.toLowerCase(); }
 
 function findMatches(text, patterns) {
   const norm = normalize(text);
   return patterns.filter(p => norm.includes(p.toLowerCase()));
 }
 
-function scoreJD(text) {
-  let score = 70; // start neutral-positive
-  const redFound = [];
+function scoreDimension(text, greenGroups, redGroups) {
+  let score = 50;
   const greenFound = [];
-  const yellowFound = [];
+  const redFound = [];
 
-  // Check red flags
-  RED_FLAGS.forEach(flag => {
+  greenGroups.forEach(g => {
+    const matches = findMatches(text, g.patterns);
+    if (matches.length > 0) {
+      greenFound.push(`${g.label} (found: "${matches[0]}")`);
+      score += 10;
+    }
+  });
+
+  redGroups.forEach(r => {
+    const matches = findMatches(text, r.patterns);
+    if (matches.length > 0) {
+      redFound.push(`${r.label} (found: "${matches[0]}")`);
+      score -= 15;
+    }
+  });
+
+  return {
+    score: Math.max(5, Math.min(98, score)),
+    greenFound,
+    redFound
+  };
+}
+
+function scoreJD(text) {
+  const cognition = scoreDimension(text, COGNITION_GREEN, COGNITION_RED);
+  const energy = scoreDimension(text, ENERGY_GREEN, ENERGY_RED);
+  const ambiguity = scoreDimension(text, AMBIGUITY_GREEN, AMBIGUITY_RED);
+  const orgpsych = scoreDimension(text, ORGPSYCH_GREEN, ORGPSYCH_RED);
+
+  const overall = Math.round((cognition.score + energy.score + ambiguity.score + orgpsych.score) / 4);
+
+  const allGreen = [...cognition.greenFound, ...energy.greenFound, ...ambiguity.greenFound, ...orgpsych.greenFound];
+  const allRed = [...cognition.redFound, ...energy.redFound, ...ambiguity.redFound, ...orgpsych.redFound];
+
+  const yellowFound = [];
+  YELLOW_FLAGS.forEach(flag => {
     const matches = findMatches(text, flag.patterns);
     if (matches.length > 0) {
-      redFound.push(`${flag.label} — ${flag.explanation} (found: "${matches[0]}")`);
-      score -= 12;
+      yellowFound.push(`${flag.label} (found: "${matches[0]}")`);
     }
   });
 
-  // Check green signals
-  GREEN_SIGNALS.forEach(signal => {
-    const matches = findMatches(text, signal.patterns);
-    if (matches.length > 0) {
-      greenFound.push(`${signal.label} (found: "${matches[0]}")`);
-      score += 6;
-    }
-  });
-
-  // Cap score
-  score = Math.max(5, Math.min(98, score));
-
-  // Yellow flags — things present that need probing
-  if (findMatches(text, ['cross-functional', 'cross functional']).length > 0 && redFound.length > 1) {
-    yellowFound.push('Cross-functional role — worth clarifying who owns what and how conflict is resolved');
-  }
-  if (findMatches(text, ['startup', 'early stage', 'early-stage', 'series a', 'series b']).length > 0) {
-    yellowFound.push('Startup environment — ask about prioritization process and how scope is managed');
-  }
-  if (findMatches(text, ['ai', 'artificial intelligence', 'machine learning']).length > 0 && greenFound.length < 2) {
-    yellowFound.push('AI/tech buzzwords present — ask how these tools are actually used day-to-day');
-  }
-  if (findMatches(text, ['client', 'clients', 'customer facing', 'customer-facing']).length > 0) {
-    yellowFound.push('Client-facing language — clarify volume of client interactions and context-switching expectations');
-  }
-
-  // Ten second checks
   const tenSecond = {};
-  TEN_SECOND.forEach(item => {
-    const greenHits = findMatches(text, item.greenPatterns).length;
-    const redHits = findMatches(text, item.redPatterns).length;
-    tenSecond[item.key] = greenHits > redHits;
+  AT_A_GLANCE.forEach(item => {
+    const g = findMatches(text, item.greenPatterns).length;
+    const r = findMatches(text, item.redPatterns).length;
+    tenSecond[item.key] = g > r;
   });
 
-  // Verdict
   let verdict, bottomLine;
-  if (score >= 72) {
+  if (overall >= 65) {
     verdict = 'Neurodiversity-Friendly';
-    bottomLine = 'This role shows positive signals for a sustainable, structured work environment. Worth pursuing — use the questions below to confirm fit.';
-  } else if (score >= 48) {
+    bottomLine = 'This role shows positive signals across multiple dimensions. Worth pursuing — use the questions below to confirm fit before committing.';
+  } else if (overall >= 42) {
     verdict = 'Proceed with Caution';
-    bottomLine = 'This role has a mixed profile. Some flags worth probing in screening — the questions below can help you extract signal from noise before committing.';
+    bottomLine = 'This role has a mixed profile. Some dimensions look promising, others raise questions. The screening questions below can help you extract signal from noise.';
   } else {
     verdict = 'Significant Concerns';
-    bottomLine = 'This role contains several patterns that tend to correlate with high cognitive load and burnout risk for neurodivergent professionals. Proceed carefully, or use the questions below to challenge your assumptions before applying.';
+    bottomLine = 'This role contains several patterns that tend to correlate with high cognitive load and burnout risk for neurodivergent professionals. Use the questions below to challenge your assumptions before applying.';
   }
 
-  // Generate questions based on what was found
+  // Generate contextual questions
   const questions = [];
-  if (redFound.some(r => r.includes('Fast-paced'))) {
-    questions.push('How are competing priorities typically handled when multiple things are urgent simultaneously?');
+  if (allRed.some(r => r.includes('Always on') || r.includes('rapid response'))) {
+    questions.push('How are urgent requests typically handled — is there a prioritization process, or does everything feel equally urgent?');
   }
-  if (redFound.some(r => r.includes('many hats'))) {
-    questions.push('Can you walk me through what a typical week looks like in this role — what does the balance of responsibilities actually look like day to day?');
+  if (allRed.some(r => r.includes('many hats') || r.includes('expectation ambiguity'))) {
+    questions.push('Can you walk me through what a typical week looks like in this role — what does the actual balance of responsibilities look like day to day?');
   }
-  if (redFound.some(r => r.includes('Resilience'))) {
-    questions.push('How does the team handle it when someone is overwhelmed or needs to reprioritize?');
-  }
-  if (redFound.some(r => r.includes('High visibility'))) {
-    questions.push('How much protected heads-down time does someone in this role typically have in a week?');
-  }
-  if (redFound.some(r => r.includes('communication'))) {
+  if (allRed.some(r => r.includes('political') || r.includes('influence without'))) {
     questions.push('How are decisions typically made and communicated — is there a formal process, or does it tend to happen informally?');
+  }
+  if (allRed.some(r => r.includes('open plan') || r.includes('sensory'))) {
+    questions.push('What does the physical workspace look like — are there quiet areas or options to control your environment?');
   }
   if (tenSecond.clear_expectations === false) {
     questions.push('What does success look like in the first 90 days, and how is it measured?');
   }
+  if (tenSecond.visible_impact === false) {
+    questions.push('Can you walk me through how research or insights from this role have influenced a recent decision?');
+  }
   if (questions.length === 0) {
-    questions.push('What does success look like in the first 90 days?');
+    questions.push('What does success look like in the first 90 days, and how is it measured?');
     questions.push('How does the team communicate — what\'s the balance of async vs real-time?');
-    questions.push('How are priorities set when multiple things feel urgent?');
+    questions.push('How are priorities set when multiple things feel urgent simultaneously?');
+    questions.push('Can you describe the level of autonomy someone in this role typically has over how they do their work?');
   }
 
-  return { score, verdict, bottomLine, redFound, greenFound, yellowFound, tenSecond, questions };
+  return {
+    overall,
+    cognition: cognition.score,
+    energy: energy.score,
+    ambiguity: ambiguity.score,
+    orgpsych: orgpsych.score,
+    verdict,
+    bottomLine,
+    allGreen,
+    allRed,
+    yellowFound,
+    tenSecond,
+    questions
+  };
 }
 
 function fillClass(verdict) {
@@ -690,8 +798,14 @@ function verdictClass(verdict) {
 }
 
 function scoreColor(score) {
-  if (score >= 72) return '#454623';
-  if (score >= 48) return '#7a5c1e';
+  if (score >= 65) return '#454623';
+  if (score >= 42) return '#7a5c1e';
+  return '#7a2e2e';
+}
+
+function dimColor(score) {
+  if (score >= 65) return '#454623';
+  if (score >= 42) return '#7a5c1e';
   return '#7a2e2e';
 }
 
@@ -707,10 +821,30 @@ function render(data) {
   const fc = fillClass(data.verdict);
   const vc = verdictClass(data.verdict);
 
-  const tenHtml = TEN_SECOND.map(item => {
+  const tenHtml = AT_A_GLANCE.map(item => {
     const val = data.tenSecond[item.key];
     return `<div class="check-item ${val ? 'chk-yes' : 'chk-no'}"><span>${val ? '✓' : '✗'}</span><span>${item.label}</span></div>`;
   }).join('');
+
+  const dimHtml = `
+    <div class="dim-scores">
+      <div class="dim-score-item">
+        <div class="dim-score-label">Cognition</div>
+        <div class="dim-score-val" style="color:${dimColor(data.cognition)}">${data.cognition}</div>
+      </div>
+      <div class="dim-score-item">
+        <div class="dim-score-label">Energy</div>
+        <div class="dim-score-val" style="color:${dimColor(data.energy)}">${data.energy}</div>
+      </div>
+      <div class="dim-score-item">
+        <div class="dim-score-label">Ambiguity</div>
+        <div class="dim-score-val" style="color:${dimColor(data.ambiguity)}">${data.ambiguity}</div>
+      </div>
+      <div class="dim-score-item">
+        <div class="dim-score-label">Org Psychology</div>
+        <div class="dim-score-val" style="color:${dimColor(data.orgpsych)}">${data.orgpsych}</div>
+      </div>
+    </div>`;
 
   const qSection = data.questions.length ? `<div class="section-card">
     <div class="section-head c-plum"><span class="dot dot-plum"></span>Questions to ask in screening</div>
@@ -720,12 +854,13 @@ function render(data) {
   document.getElementById('results').innerHTML = `
     <div class="score-card">
       <div class="score-top">
-        <span class="score-num" style="color:${scoreColor(data.score)}">${data.score}</span>
+        <span class="score-num" style="color:${scoreColor(data.overall)}">${data.overall}</span>
         <span class="score-denom">/ 100</span>
         <span class="verdict-pill ${vc}">${data.verdict}</span>
       </div>
-      <div class="track"><div class="fill ${fc}" style="width:${data.score}%"></div></div>
+      <div class="track"><div class="fill ${fc}" style="width:${data.overall}%"></div></div>
       <p class="bottom-line">${data.bottomLine}</p>
+      ${dimHtml}
     </div>
 
     <div class="section-card">
@@ -733,8 +868,8 @@ function render(data) {
       <div class="ten-grid">${tenHtml}</div>
     </div>
 
-    ${makeSection('dot-go', 'c-go', 'Green signals', data.greenFound)}
-    ${makeSection('dot-no', 'c-no', 'Red flags', data.redFound)}
+    ${makeSection('dot-go', 'c-go', 'Green signals', data.allGreen)}
+    ${makeSection('dot-no', 'c-no', 'Red flags', data.allRed)}
     ${makeSection('dot-caution', 'c-caution', 'Proceed with caution — validate in screening', data.yellowFound)}
     ${qSection}
   `;
@@ -755,7 +890,6 @@ function runEval() {
   const data = scoreJD(jd);
   render(data);
 
-  // Scroll to results
   setTimeout(() => {
     document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
