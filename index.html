@@ -28,6 +28,8 @@
   --amber-signal-light: #f5edda;
   --red-signal: #7a2e2e;
   --red-signal-light: #f5e0e0;
+  --blue-signal: #1e3d5c;
+  --blue-signal-light: #ddeaf5;
 }
 
 html, body {
@@ -258,6 +260,15 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 .run-btn:hover { background: #2a1629; }
 .run-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
+.about-vireo {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  text-align: center;
+  font-style: italic;
+  line-height: 1.6;
+}
+
 .results { display: none; margin-top: 1.75rem; }
 .results.on { display: block; }
 
@@ -277,15 +288,6 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   flex-wrap: wrap;
 }
 
-.score-num {
-  font-family: 'Cormorant Garant', serif;
-  font-size: 3.5rem;
-  line-height: 1;
-  font-weight: 300;
-}
-
-.score-denom { font-size: 1rem; color: var(--ink-muted); font-weight: 300; }
-
 .verdict-pill {
   display: inline-block;
   padding: 0.28rem 0.85rem;
@@ -294,7 +296,6 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-left: auto;
 }
 
 .v-go { background: var(--green-signal-light); color: var(--green-signal); }
@@ -321,6 +322,7 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   font-style: italic;
   color: var(--ink-muted);
   line-height: 1.65;
+  margin-bottom: 1rem;
 }
 
 .dim-scores {
@@ -342,14 +344,25 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-muted);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.35rem;
 }
 
-.dim-score-val {
-  font-family: 'Cormorant Garant', serif;
-  font-size: 1.4rem;
-  font-weight: 300;
-  line-height: 1;
+.dim-signal-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.3rem;
+}
+
+.dim-signal-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+
+.dim-signal-label {
+  font-size: 0.7rem;
+  font-weight: 500;
 }
 
 .section-card {
@@ -377,12 +390,14 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 .dot-no { background: #c04040; }
 .dot-plum { background: var(--plum-mid); }
 .dot-neutral { background: var(--ink-faint); }
+.dot-blue { background: #3a7abf; }
 
 .c-go { color: var(--green-signal); }
 .c-caution { color: var(--amber-signal); }
 .c-no { color: var(--red-signal); }
 .c-plum { color: var(--plum); }
 .c-neutral { color: var(--ink-muted); }
+.c-blue { color: var(--blue-signal); }
 
 .finding-list {
   list-style: none;
@@ -406,21 +421,37 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
   color: var(--ink-faint);
 }
 
-.ten-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+.glance-grid {
+  display: flex;
+  flex-direction: column;
   gap: 0.4rem;
 }
 
-.check-item {
+.glance-item {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--surface-alt);
 }
 
-.chk-yes { color: var(--moss-dark); font-weight: 500; }
-.chk-no { color: #c04040; }
+.glance-item:last-child { border-bottom: none; }
+
+.glance-icon {
+  font-size: 0.9rem;
+  width: 1.4rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.glance-label { flex: 1; color: var(--ink); }
+
+.glance-note {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  font-style: italic;
+}
 
 .q-list { display: flex; flex-direction: column; gap: 0.4rem; }
 
@@ -470,7 +501,7 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
       How This Filter Works <span class="arrow">▼</span>
     </button>
     <div class="how-content">
-      <p style="font-size:0.85rem;color:var(--ink-muted);margin-bottom:1rem;line-height:1.6;">This filter evaluates job descriptions across four dimensions that affect how neurodivergent brains interact with work environments. No diagnosis required — these signals matter for anyone whose brain doesn't love chaos.</p>
+      <p style="font-size:0.85rem;color:var(--ink-muted);margin-bottom:1rem;line-height:1.6;">This filter reads job descriptions for language that tends to signal neurodiversity-friendly (or unfriendly) environments. It detects whether certain concepts appear — it doesn't score the job. Organizations that prioritize psychological safety, clear expectations, and sustainable work tend to say so explicitly. Absence of that language is itself informative.</p>
 
       <div class="dimension">
         <div class="dimension-title">1. Cognition — does the work reward how your brain processes information?</div>
@@ -543,6 +574,7 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
             <div class="flag-col-label red">Red flags</div>
             <ul class="flag-list">
               <li>Role / expectation ambiguity (bad)</li>
+              <li>"Thrives in ambiguity" / "zero to one"</li>
               <li>Hidden rules / unwritten expectations</li>
               <li>Shifting priorities without rationale</li>
               <li>"Role will evolve" / "responsibilities may shift"</li>
@@ -559,6 +591,7 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
             <div class="flag-col-label green">Green signals</div>
             <ul class="flag-list">
               <li>Psychological safety language</li>
+              <li>Belonging / "uniquely you" language</li>
               <li>Written / explicit communication culture</li>
               <li>Regular structured feedback / check-ins</li>
               <li>Mentorship / support culture</li>
@@ -589,6 +622,8 @@ textarea::placeholder { color: var(--ink-faint); font-style: italic; }
 
   <button class="run-btn" onclick="runEval()" id="eval-btn">Run JD Filter →</button>
 
+  <p class="about-vireo">About Vireo: Coaching is a guided process that helps you uncover, hone, and use your individual strengths.</p>
+
   <div class="err" id="err"></div>
   <div class="results" id="results"></div>
 </main>
@@ -613,7 +648,7 @@ const COGNITION_RED = [
 
 // ── DIMENSION 2: ENERGY REGULATION ─────────────────────────────────────────
 const ENERGY_GREEN = [
-  { label: 'Flexible / remote / async options', patterns: ['remote', 'work from home', 'flexible hours', 'hybrid', 'async', 'asynchronous', 'flexible schedule', 'work-life balance', 'flexible start', 'quiet space', 'sensory', 'noise-cancelling', 'adjustable lighting'] },
+  { label: 'Flexible / remote / async options', patterns: ['remote', 'work from home', 'flexible hours', 'hybrid', 'async', 'asynchronous', 'flexible schedule', 'work-life balance', 'flexible start', 'quiet space', 'sensory', 'noise-cancelling', 'adjustable lighting', 'flexible work policy', 'work the hours'] },
   { label: 'Protected focus time', patterns: ['deep work', 'focused work', 'uninterrupted', 'heads-down', 'protected time', 'independent work', 'autonomous'] },
   { label: 'Structured / sustainable pace', patterns: ['sustainable', 'structured onboarding', 'regular check-ins', 'scheduled breaks', 'reasonable hours', 'work-life', 'mentorship', 'support structure'] }
 ];
@@ -627,20 +662,20 @@ const ENERGY_RED = [
 
 // ── DIMENSION 3: AMBIGUITY ──────────────────────────────────────────────────
 const AMBIGUITY_GREEN = [
-  { label: 'Conceptual / problem ambiguity (good)', patterns: ['complex problems', 'ambiguous problems', 'undefined challenges', 'make sense of', 'synthesize', 'proactive', 'strategic', 'messy data', 'noisy data', 'greenfield', 'build from scratch'] }
+  { label: 'Conceptual / problem ambiguity (good)', patterns: ['complex problems', 'ambiguous problems', 'undefined challenges', 'make sense of', 'synthesize', 'proactive', 'strategic', 'messy data', 'noisy data', 'greenfield'] }
 ];
 
 const AMBIGUITY_RED = [
-  { label: 'Role / expectation ambiguity (bad)', patterns: ['role will evolve', 'responsibilities may shift', 'ambiguous expectations', 'ambiguous responsibilities', 'wear many hats', 'many hats', 'wear multiple hats', 'startup culture', 'startup environment', 'juggling', 'scrappy', 'do it all', 'all hands on deck', 'as needed', 'other duties', 'ad hoc', 'various tasks', 'whatever it takes', 'roll up your sleeves', 'fluid role'] },
+  { label: 'Role / expectation ambiguity (bad)', patterns: ['role will evolve', 'responsibilities may shift', 'ambiguous expectations', 'ambiguous responsibilities', 'wear many hats', 'many hats', 'wear multiple hats', 'startup culture', 'startup environment', 'juggling', 'scrappy', 'do it all', 'all hands on deck', 'as needed', 'other duties', 'ad hoc', 'various tasks', 'whatever it takes', 'roll up your sleeves', 'fluid role', 'thrives in ambiguity', 'thrive in ambiguity', 'zero to one', 'zero-to-one', 'building from scratch'] },
   { label: 'Hidden rules / unwritten expectations', patterns: ['hidden curriculum', 'unwritten rules', 'read the room', 'politically savvy', 'navigate the organization', 'informal influence', 'influence without authority', 'manage up'] }
 ];
 
 // ── DIMENSION 4: ORGANIZATIONAL PSYCHOLOGY ─────────────────────────────────
 const ORGPSYCH_GREEN = [
-  { label: 'Psychological safety language', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'growth mindset', 'neurodiversity', 'neuroinclusive', 'disability', 'accommodations'] },
+  { label: 'Psychological safety / belonging', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'growth mindset', 'neurodiversity', 'neuroinclusive', 'disability', 'accommodations', 'uniquely you', 'happiness at work', 'human connection', 'fiercely authentic'] },
   { label: 'Explicit communication culture', patterns: ['written communication', 'clear communication', 'transparent', 'documentation', 'well-documented', 'async communication', 'clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable outcomes', 'clear instructions', 'written instructions'] },
-  { label: 'Structured feedback / support', patterns: ['regular feedback', 'structured feedback', 'one-on-one', '1:1', 'mentorship', 'mentor', 'coaching', 'support structure', 'regular check-ins', 'onboarding'] },
-  { label: 'Visible impact / decisions', patterns: ['decision support', 'informs strategy', 'informs decisions', 'shapes strategy', 'executive storytelling', 'advisory', 'insights that drive', 'research that influences', 'your work will'] }
+  { label: 'Structured feedback / support', patterns: ['regular feedback', 'structured feedback', 'one-on-one', '1:1', 'mentorship', 'mentor', 'coaching', 'support structure', 'regular check-ins', 'onboarding', 'professional development', 'career mobility'] },
+  { label: 'Visible impact / decisions', patterns: ['decision support', 'informs strategy', 'informs decisions', 'shapes strategy', 'executive storytelling', 'advisory', 'insights that drive', 'research that influences', 'your work will', 'translate insights', 'translate customer insights', 'inform product strategy', 'influence senior', 'directly influence'] }
 ];
 
 const ORGPSYCH_RED = [
@@ -652,21 +687,31 @@ const ORGPSYCH_RED = [
 
 // ── YELLOW FLAGS ────────────────────────────────────────────────────────────
 const YELLOW_FLAGS = [
-  { label: '"Fast-paced" — ask what actually creates urgency', patterns: ['fast-paced', 'fast paced', 'rapidly changing', 'high velocity', 'moves fast', 'fast moving', 'dynamic environment', 'rapidly evolving'] },
-  { label: '"Self-starter" — ask about support structures and onboarding', patterns: ['self-starter', 'self-motivated', 'self-directed', 'driven'] },
-  { label: 'Cross-functional role — clarify ownership and conflict resolution', patterns: ['cross-functional', 'cross functional'] },
-  { label: '"High visibility" — clarify whether strategic or performative', patterns: ['high visibility', 'high-visibility', 'highly visible'] },
-  { label: 'Client-facing language — ask about volume and context-switching', patterns: ['client-facing', 'customer-facing', 'client management', 'multiple clients'] },
-  { label: 'Resilience language — ask what creates pressure', patterns: ['resilient', 'resilience', 'thick skin', 'grit', 'high pressure', 'high-pressure', 'demanding environment', 'thrive under pressure'] }
+  { label: '"Fast-paced" — ask how priorities are set and communicated', patterns: ['fast-paced', 'fast paced', 'rapidly changing', 'high velocity', 'moves fast', 'fast moving', 'dynamic environment', 'rapidly evolving'], question: 'How are priorities established and communicated? When priorities shift, how does the team find out?' },
+  { label: '"Self-starter" — ask about onboarding and feedback structures', patterns: ['self-starter', 'self-motivated', 'self-directed', 'driven'], question: 'What does onboarding look like in this role — how long before someone is expected to be fully independent?' },
+  { label: 'Cross-functional role — clarify ownership and conflict resolution', patterns: ['cross-functional', 'cross functional'], question: 'When priorities conflict across teams, how is that typically resolved — and who has final say?' },
+  { label: '"High visibility" — clarify whether strategic or performative', patterns: ['high visibility', 'high-visibility', 'highly visible'], question: 'What does visibility look like in this role — is it about influence, or presence? How often would I interact with senior leadership, and in what format?' },
+  { label: 'Client-facing language — ask about volume and context-switching', patterns: ['client-facing', 'customer-facing', 'client management', 'multiple clients'], question: 'How many projects does someone in this role typically own at once, and how is context-switching managed?' },
+  { label: 'Resilience language — ask what creates the pressure', patterns: ['resilient', 'resilience', 'thick skin', 'grit', 'high pressure', 'high-pressure', 'demanding environment', 'thrive under pressure'], question: 'What kinds of challenges does someone typically encounter in this role — and what support systems are in place when work gets particularly demanding?' },
+  { label: '"Fast-evolving" environment — ask who controls the pace', patterns: ['fast-evolving', 'fast evolving', 'front lines', 'front-lines'], question: 'What drives the pace of change here — is it internal or external? How does the team manage when the environment shifts?' },
+  { label: '"Communication skills" emphasis — ask what that looks like in practice', patterns: ['communication skills', 'strong communicator', 'excellent communicator', 'strong communication'], question: 'What types of communication matter most in this role — and what does good communication look like on this team?' }
+];
+
+// ── CONTEXT-DEPENDENT FLAGS ─────────────────────────────────────────────────
+const CONTEXT_FLAGS = [
+  { label: '"Collaborative" — could mean psychologically safe, or meeting-heavy. Read the paragraph.', patterns: ['collaborative', 'collaboration'] },
+  { label: '"Entrepreneurial" — could mean real ownership, or understaffed. Read the paragraph.', patterns: ['entrepreneurial'] },
+  { label: '"Pivoting" — could mean adaptability valued, or chaotic priorities. Read the paragraph.', patterns: ['pivoting to different', 'pivot quickly', 'ability to pivot'] },
+  { label: '"Self-directed" — could mean autonomy, or sink-or-swim. Read the paragraph.', patterns: ['self-directed culture', 'self-directed environment'] }
 ];
 
 // ── AT A GLANCE ─────────────────────────────────────────────────────────────
 const AT_A_GLANCE = [
   { key: 'clear_expectations', label: 'Clear expectations', greenPatterns: ['clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable', 'clear instructions'], redPatterns: ['role will evolve', 'fluid', 'as needed', 'other duties'] },
   { key: 'deep_work_possible', label: 'Deep work possible', greenPatterns: ['async', 'remote', 'flexible', 'independent', 'focused', 'heads-down'], redPatterns: ['always on', 'rapid response', 'open plan', 'constant communication', 'many meetings'] },
-  { key: 'psych_safety', label: 'Psych safety signals', greenPatterns: ['psychological safety', 'inclusive', 'belonging', 'mentorship', 'diverse perspectives', 'neurodiversity'], redPatterns: ['thick skin', 'resilience', 'culture fit', 'high pressure'] },
+  { key: 'psych_safety', label: 'Psych safety signals', greenPatterns: ['psychological safety', 'inclusive', 'belonging', 'mentorship', 'diverse perspectives', 'neurodiversity', 'uniquely you'], redPatterns: ['thick skin', 'resilience', 'culture fit', 'high pressure'] },
   { key: 'explicit_comms', label: 'Explicit communication', greenPatterns: ['written communication', 'documented', 'transparent', 'clear instructions', 'async communication'], redPatterns: ['read the room', 'politically savvy', 'hidden', 'informal'] },
-  { key: 'visible_impact', label: 'Visible impact', greenPatterns: ['decision support', 'informs strategy', 'shapes direction', 'advisory', 'your work will', 'insights that drive'], redPatterns: ['support function', 'reporting only', 'deliverables'] }
+  { key: 'visible_impact', label: 'Visible impact', greenPatterns: ['decision support', 'informs strategy', 'shapes direction', 'advisory', 'your work will', 'insights that drive', 'translate insights', 'directly influence', 'influence senior'], redPatterns: ['support function', 'reporting only', 'deliverables'] }
 ];
 
 function normalize(text) { return text.toLowerCase(); }
@@ -704,6 +749,12 @@ function scoreDimension(text, greenGroups, redGroups) {
   };
 }
 
+function signalStrength(score) {
+  if (score >= 65) return { label: 'Strong signal', color: 'var(--green-signal)', fill: 'var(--moss)', pct: score };
+  if (score >= 42) return { label: 'Moderate signal', color: '#7a5c1e', fill: '#c49a2a', pct: score };
+  return { label: 'Weak signal', color: 'var(--red-signal)', fill: '#c04040', pct: score };
+}
+
 function scoreJD(text) {
   const cognition = scoreDimension(text, COGNITION_GREEN, COGNITION_RED);
   const energy = scoreDimension(text, ENERGY_GREEN, ENERGY_RED);
@@ -719,54 +770,68 @@ function scoreJD(text) {
   YELLOW_FLAGS.forEach(flag => {
     const matches = findMatches(text, flag.patterns);
     if (matches.length > 0) {
-      yellowFound.push(`${flag.label} (found: "${matches[0]}")`);
+      yellowFound.push({ label: `${flag.label} (found: "${matches[0]}")`, question: flag.question });
     }
   });
 
+  const contextFound = [];
+  CONTEXT_FLAGS.forEach(flag => {
+    const matches = findMatches(text, flag.patterns);
+    if (matches.length > 0) {
+      contextFound.push(`${flag.label} (found: "${matches[0]}")`);
+    }
+  });
+
+  // Three-state at-a-glance
   const tenSecond = {};
   AT_A_GLANCE.forEach(item => {
     const g = findMatches(text, item.greenPatterns).length;
     const r = findMatches(text, item.redPatterns).length;
-    tenSecond[item.key] = g > r;
+    if (g > 0 && r === 0) tenSecond[item.key] = 'yes';
+    else if (r > 0) tenSecond[item.key] = 'no';
+    else tenSecond[item.key] = 'unknown';
   });
 
-  let verdict, bottomLine;
+  let verdict, bottomLine, fillClass, verdictClass;
   if (overall >= 65) {
     verdict = 'Neurodiversity-Friendly';
     bottomLine = 'This role shows positive signals across multiple dimensions. Worth pursuing — use the questions below to confirm fit before committing.';
+    fillClass = 'fill-go';
+    verdictClass = 'v-go';
   } else if (overall >= 42) {
     verdict = 'Proceed with Caution';
-    bottomLine = 'This role has a mixed profile. Some dimensions look promising, others raise questions. The screening questions below can help you extract signal from noise.';
+    bottomLine = 'This role has a mixed signal profile. Some dimensions look promising, others raise questions. The screening questions below can help you extract signal from noise.';
+    fillClass = 'fill-caution';
+    verdictClass = 'v-caution';
   } else {
     verdict = 'Significant Concerns';
     bottomLine = 'This role contains several patterns that tend to correlate with high cognitive load and burnout risk for neurodivergent professionals. Use the questions below to challenge your assumptions before applying.';
+    fillClass = 'fill-no';
+    verdictClass = 'v-no';
   }
 
-  // Generate contextual questions
-  const questions = [];
-  if (allRed.some(r => r.includes('Always on') || r.includes('rapid response'))) {
-    questions.push('How are urgent requests typically handled — is there a prioritization process, or does everything feel equally urgent?');
-  }
-  if (allRed.some(r => r.includes('many hats') || r.includes('expectation ambiguity'))) {
-    questions.push('Can you walk me through what a typical week looks like in this role — what does the actual balance of responsibilities look like day to day?');
-  }
-  if (allRed.some(r => r.includes('political') || r.includes('influence without'))) {
-    questions.push('How are decisions typically made and communicated — is there a formal process, or does it tend to happen informally?');
-  }
-  if (allRed.some(r => r.includes('open plan') || r.includes('sensory'))) {
-    questions.push('What does the physical workspace look like — are there quiet areas or options to control your environment?');
-  }
-  if (tenSecond.clear_expectations === false) {
+  // Generate contextual questions from yellow flags first
+  const questions = yellowFound.map(y => y.question);
+
+  // Add at-a-glance based questions for gaps not already covered
+  if (tenSecond.clear_expectations !== 'yes' && !questions.some(q => q.includes('priorities'))) {
     questions.push('What does success look like in the first 90 days, and how is it measured?');
   }
-  if (tenSecond.visible_impact === false) {
+  if (tenSecond.visible_impact !== 'yes' && !questions.some(q => q.includes('decision'))) {
     questions.push('Can you walk me through how research or insights from this role have influenced a recent decision?');
   }
+  if (tenSecond.psych_safety === 'unknown' && !questions.some(q => q.includes('support'))) {
+    questions.push('What support systems are in place when work becomes particularly demanding?');
+  }
+  if (tenSecond.explicit_comms === 'unknown' && !questions.some(q => q.includes('communication'))) {
+    questions.push('What types of communication matter most in this role — written, real-time, or a mix?');
+  }
+
+  // Final fallback if nothing fired at all
   if (questions.length === 0) {
     questions.push('What does success look like in the first 90 days, and how is it measured?');
-    questions.push('How does the team communicate — what\'s the balance of async vs real-time?');
     questions.push('How are priorities set when multiple things feel urgent simultaneously?');
-    questions.push('Can you describe the level of autonomy someone in this role typically has over how they do their work?');
+    questions.push('Can you describe the level of autonomy someone in this role typically has?');
   }
 
   return {
@@ -777,36 +842,15 @@ function scoreJD(text) {
     orgpsych: orgpsych.score,
     verdict,
     bottomLine,
+    fillClass,
+    verdictClass,
     allGreen,
     allRed,
     yellowFound,
+    contextFound,
     tenSecond,
     questions
   };
-}
-
-function fillClass(verdict) {
-  if (verdict.includes('Friendly')) return 'fill-go';
-  if (verdict.includes('Caution')) return 'fill-caution';
-  return 'fill-no';
-}
-
-function verdictClass(verdict) {
-  if (verdict.includes('Friendly')) return 'v-go';
-  if (verdict.includes('Caution')) return 'v-caution';
-  return 'v-no';
-}
-
-function scoreColor(score) {
-  if (score >= 65) return '#454623';
-  if (score >= 42) return '#7a5c1e';
-  return '#7a2e2e';
-}
-
-function dimColor(score) {
-  if (score >= 65) return '#454623';
-  if (score >= 42) return '#7a5c1e';
-  return '#7a2e2e';
 }
 
 function makeSection(dotCls, headCls, label, items) {
@@ -818,33 +862,38 @@ function makeSection(dotCls, headCls, label, items) {
 }
 
 function render(data) {
-  const fc = fillClass(data.verdict);
-  const vc = verdictClass(data.verdict);
+  const dimData = [
+    { label: 'Cognition', score: data.cognition },
+    { label: 'Energy', score: data.energy },
+    { label: 'Ambiguity', score: data.ambiguity },
+    { label: 'Org Psychology', score: data.orgpsych }
+  ];
 
-  const tenHtml = AT_A_GLANCE.map(item => {
-    const val = data.tenSecond[item.key];
-    return `<div class="check-item ${val ? 'chk-yes' : 'chk-no'}"><span>${val ? '✓' : '✗'}</span><span>${item.label}</span></div>`;
+  const dimHtml = `<div class="dim-scores">${dimData.map(d => {
+    const s = signalStrength(d.score);
+    return `<div class="dim-score-item">
+      <div class="dim-score-label">${d.label}</div>
+      <div class="dim-signal-bar"><div class="dim-signal-fill" style="width:${s.pct}%;background:${s.fill}"></div></div>
+      <div class="dim-signal-label" style="color:${s.color}">${s.label}</div>
+    </div>`;
+  }).join('')}</div>`;
+
+  const glanceHtml = AT_A_GLANCE.map(item => {
+    const state = data.tenSecond[item.key];
+    const icon = state === 'yes' ? '✓' : state === 'no' ? '✗' : '?';
+    const color = state === 'yes' ? 'var(--green-signal)' : state === 'no' ? '#c04040' : 'var(--ink-faint)';
+    const note = state === 'unknown' ? 'not mentioned' : '';
+    return `<div class="glance-item">
+      <span class="glance-icon" style="color:${color};font-weight:500">${icon}</span>
+      <span class="glance-label">${item.label}</span>
+      ${note ? `<span class="glance-note">${note}</span>` : ''}
+    </div>`;
   }).join('');
 
-  const dimHtml = `
-    <div class="dim-scores">
-      <div class="dim-score-item">
-        <div class="dim-score-label">Cognition</div>
-        <div class="dim-score-val" style="color:${dimColor(data.cognition)}">${data.cognition}</div>
-      </div>
-      <div class="dim-score-item">
-        <div class="dim-score-label">Energy</div>
-        <div class="dim-score-val" style="color:${dimColor(data.energy)}">${data.energy}</div>
-      </div>
-      <div class="dim-score-item">
-        <div class="dim-score-label">Ambiguity</div>
-        <div class="dim-score-val" style="color:${dimColor(data.ambiguity)}">${data.ambiguity}</div>
-      </div>
-      <div class="dim-score-item">
-        <div class="dim-score-label">Org Psychology</div>
-        <div class="dim-score-val" style="color:${dimColor(data.orgpsych)}">${data.orgpsych}</div>
-      </div>
-    </div>`;
+  const contextSection = data.contextFound.length ? `<div class="section-card">
+    <div class="section-head c-blue"><span class="dot dot-blue"></span>Worth a closer look — context-dependent</div>
+    <ul class="finding-list">${data.contextFound.map(i => `<li>${i}</li>`).join('')}</ul>
+  </div>` : '';
 
   const qSection = data.questions.length ? `<div class="section-card">
     <div class="section-head c-plum"><span class="dot dot-plum"></span>Questions to ask in screening</div>
@@ -854,23 +903,22 @@ function render(data) {
   document.getElementById('results').innerHTML = `
     <div class="score-card">
       <div class="score-top">
-        <span class="score-num" style="color:${scoreColor(data.overall)}">${data.overall}</span>
-        <span class="score-denom">/ 100</span>
-        <span class="verdict-pill ${vc}">${data.verdict}</span>
+        <span class="verdict-pill ${data.verdictClass}">${data.verdict}</span>
       </div>
-      <div class="track"><div class="fill ${fc}" style="width:${data.overall}%"></div></div>
+      <div class="track"><div class="fill ${data.fillClass}" style="width:${data.overall}%"></div></div>
       <p class="bottom-line">${data.bottomLine}</p>
       ${dimHtml}
     </div>
 
     <div class="section-card">
       <div class="section-head c-neutral"><span class="dot dot-neutral"></span>At a glance</div>
-      <div class="ten-grid">${tenHtml}</div>
+      <div class="glance-grid">${glanceHtml}</div>
     </div>
 
     ${makeSection('dot-go', 'c-go', 'Green signals', data.allGreen)}
     ${makeSection('dot-no', 'c-no', 'Red flags', data.allRed)}
-    ${makeSection('dot-caution', 'c-caution', 'Proceed with caution — validate in screening', data.yellowFound)}
+    ${makeSection('dot-caution', 'c-caution', 'Proceed with caution — validate in screening', data.yellowFound.map(y => y.label))}
+    ${contextSection}
     ${qSection}
   `;
 
