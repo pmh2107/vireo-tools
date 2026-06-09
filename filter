@@ -187,7 +187,7 @@ function isContract(text) {
   return signals.some(s => norm.includes(s));
 }
 
-// ── DIMENSION 1: COGNITION ──────────────────────────────────────────────────
+// -- DIMENSION 1: COGNITION --------------------------------------------------
 const COGNITION_GREEN = [
   { label: 'Pattern recognition / synthesis valued', patterns: ['pattern recognition', 'synthesize', 'synthesis', 'systems thinking', 'make sense of', 'connect the dots', 'build from the ground up', 'greenfield', 'shape the function', 'center of excellence', 'strategic intelligence', 'turn insights into action', 'independent thinkers', 'constructive challenge', 'different perspectives', 'intellectual curiosity', 'surface trends', 'signal-to-insight', 'cohesive narratives'] },
   { label: 'Results-oriented culture', patterns: ['results-oriented', 'outcomes-focused', 'impact-driven', 'purpose-driven', 'output matters', 'your work will', 'decisions informed by', 'evidence-informed', 'evidence-based'] },
@@ -199,7 +199,7 @@ const COGNITION_RED = [
   { label: 'Repetitive operational work', patterns: ['reporting maintenance', 'data entry', 'maintain reports', 'update dashboards', 'maintain dashboards', 'weekly reports', 'velocity targets', 'throughput'] }
 ];
 
-// ── DIMENSION 2: ENERGY REGULATION ─────────────────────────────────────────
+// -- DIMENSION 2: ENERGY REGULATION -----------------------------------------
 const ENERGY_GREEN = [
   { label: 'Flexible / remote / async options', patterns: ['remote-first', 'remote first', 'work from home', 'flexible hours', 'hybrid', 'async', 'asynchronous', 'flexible schedule', 'work-life balance', 'flexible start', 'quiet space', 'noise-cancelling', 'flexible work policy', 'work the hours', 'remote'] },
   { label: 'Protected focus time', patterns: ['deep work', 'focused work', 'uninterrupted', 'heads-down', 'protected time', 'independent work', 'autonomous'] },
@@ -215,7 +215,7 @@ const ENERGY_RED = [
   { label: 'Highly matrixed environment', patterns: ['highly matrixed', 'matrixed environment', 'matrix organization'] }
 ];
 
-// ── DIMENSION 3: AMBIGUITY ──────────────────────────────────────────────────
+// -- DIMENSION 3: AMBIGUITY --------------------------------------------------
 const AMBIGUITY_GREEN = [
   { label: 'Conceptual / problem ambiguity (good)', patterns: ['complex problems', 'ambiguous problems', 'undefined challenges', 'make sense of', 'synthesize', 'proactive', 'strategic', 'messy data', 'noisy data', 'greenfield'] }
 ];
@@ -225,7 +225,7 @@ const AMBIGUITY_RED = [
   { label: 'Hidden rules / unwritten expectations', patterns: ['hidden curriculum', 'unwritten rules', 'read the room', 'politically savvy', 'navigate the organization', 'informal influence', 'influence without authority', 'manage up'] }
 ];
 
-// ── DIMENSION 4: ORGANIZATIONAL PSYCHOLOGY ─────────────────────────────────
+// -- DIMENSION 4: ORGANIZATIONAL PSYCHOLOGY ---------------------------------
 const ORGPSYCH_GREEN = [
   { label: 'Psychological safety / belonging', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'growth mindset', 'neurodiversity', 'neuroinclusive', 'disability', 'accommodations', 'uniquely you', 'human connection', 'fiercely authentic', 'empathy', 'mission-driven'] },
   { label: 'Explicit communication culture', patterns: ['written communication', 'clear communication', 'transparent', 'documentation', 'well-documented', 'async communication', 'clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable outcomes', 'clear instructions', 'written instructions'] },
@@ -241,28 +241,28 @@ const ORGPSYCH_RED = [
   { label: 'Insights without influence', patterns: ['support function', 'reporting function', 'no seat at the table', 'buried in', 'deliverables without'] }
 ];
 
-// ── YELLOW FLAGS ────────────────────────────────────────────────────────────
+// -- YELLOW FLAGS ------------------------------------------------------------
 const YELLOW_FLAGS = [
-  { label: '"Fast-paced" — ask how priorities are set and communicated', patterns: ['fast-paced', 'fast paced', 'rapidly changing', 'high velocity', 'moves fast', 'fast moving', 'fast-moving', 'rapidly evolving'], question: 'How are priorities established and communicated? When priorities shift, how does the team find out?' },
-  { label: '"Self-starter" — ask about onboarding and feedback structures', patterns: ['self-starter', 'self-motivated', 'self-driven'], question: 'What does onboarding look like in this role — how long before someone is expected to be fully independent?' },
-  { label: 'Cross-functional role — clarify ownership and conflict resolution', patterns: ['cross-functional', 'cross functional'], question: 'When priorities conflict across teams, how is that typically resolved — and who has final say?' },
-  { label: '"High visibility" — clarify whether strategic or performative', patterns: ['high visibility', 'high-visibility', 'highly visible'], question: 'What does visibility look like in this role — is it about influence, or presence? How often would I interact with senior leadership, and in what format?' },
-  { label: 'Client-facing / multi-client role — ask about volume and context-switching', patterns: ['client-facing', 'customer-facing', 'multiple clients', 'multiple client types', 'client portfolio'], question: 'How many projects or clients does someone in this role typically own at once, and how is context-switching managed?' },
-  { label: 'Resilience language — ask what creates the pressure', patterns: ['resilience', 'thick skin', 'high pressure', 'high-pressure', 'demanding environment', 'thrive under pressure'], question: 'What kinds of challenges does someone typically encounter in this role — and what support systems are in place when work gets particularly demanding?' },
-  { label: '"Fast-evolving" / "front lines" — ask who controls the pace', patterns: ['fast-evolving', 'fast evolving', 'front lines', 'front-lines'], question: 'What drives the pace of change here — is it internal or external? How does the team manage when the environment shifts?' },
-  { label: '"Communication skills" emphasis — ask what that looks like in practice', patterns: ['communication skills', 'strong communicator', 'excellent communicator', 'strong communication'], question: 'What types of communication matter most in this role — and what does good communication look like on this team?' },
-  { label: 'Agency / new business signals — ask about pitch work and quick-turn volume', patterns: ['quick turn', 'quick-turn', 'new business', 'pitch narrative', 'pitch work', 'winning proposals', 'generate new business', 'grow the business'], question: 'How is time allocated between existing client work and new business — and what does a typical quick-turn deliverable look like?' }
+  { label: '"Fast-paced" - ask how priorities are set and communicated', patterns: ['fast-paced', 'fast paced', 'rapidly changing', 'high velocity', 'moves fast', 'fast moving', 'fast-moving', 'rapidly evolving'], question: 'How are priorities established and communicated? When priorities shift, how does the team find out?' },
+  { label: '"Self-starter" - ask about onboarding and feedback structures', patterns: ['self-starter', 'self-motivated', 'self-driven'], question: 'What does onboarding look like in this role - how long before someone is expected to be fully independent?' },
+  { label: 'Cross-functional role - clarify ownership and conflict resolution', patterns: ['cross-functional', 'cross functional'], question: 'When priorities conflict across teams, how is that typically resolved - and who has final say?' },
+  { label: '"High visibility" - clarify whether strategic or performative', patterns: ['high visibility', 'high-visibility', 'highly visible'], question: 'What does visibility look like in this role - is it about influence, or presence? How often would I interact with senior leadership, and in what format?' },
+  { label: 'Client-facing / multi-client role - ask about volume and context-switching', patterns: ['client-facing', 'customer-facing', 'multiple clients', 'multiple client types', 'client portfolio'], question: 'How many projects or clients does someone in this role typically own at once, and how is context-switching managed?' },
+  { label: 'Resilience language - ask what creates the pressure', patterns: ['resilience', 'thick skin', 'high pressure', 'high-pressure', 'demanding environment', 'thrive under pressure'], question: 'What kinds of challenges does someone typically encounter in this role - and what support systems are in place when work gets particularly demanding?' },
+  { label: '"Fast-evolving" / "front lines" - ask who controls the pace', patterns: ['fast-evolving', 'fast evolving', 'front lines', 'front-lines'], question: 'What drives the pace of change here - is it internal or external? How does the team manage when the environment shifts?' },
+  { label: '"Communication skills" emphasis - ask what that looks like in practice', patterns: ['communication skills', 'strong communicator', 'excellent communicator', 'strong communication'], question: 'What types of communication matter most in this role - and what does good communication look like on this team?' },
+  { label: 'Agency / new business signals - ask about pitch work and quick-turn volume', patterns: ['quick turn', 'quick-turn', 'new business', 'pitch narrative', 'pitch work', 'winning proposals', 'generate new business', 'grow the business'], question: 'How is time allocated between existing client work and new business - and what does a typical quick-turn deliverable look like?' }
 ];
 
-// ── CONTEXT-DEPENDENT FLAGS ─────────────────────────────────────────────────
+// -- CONTEXT-DEPENDENT FLAGS -------------------------------------------------
 const CONTEXT_FLAGS = [
-  { label: '"Collaborative" — could mean psychologically safe, or meeting-heavy. Read the paragraph.', patterns: ['collaborative', 'collaboration'] },
-  { label: '"Entrepreneurial" — could mean real ownership, or understaffed. Read the paragraph.', patterns: ['entrepreneurial'] },
-  { label: '"Pivoting" — could mean adaptability valued, or chaotic priorities. Read the paragraph.', patterns: ['pivoting to different', 'pivot quickly', 'ability to pivot'] },
-  { label: '"Self-directed" — could mean autonomy, or sink-or-swim. Read the paragraph.', patterns: ['self-directed culture', 'self-directed environment'] }
+  { label: '"Collaborative" - could mean psychologically safe, or meeting-heavy. Read the paragraph.', patterns: ['collaborative', 'collaboration'] },
+  { label: '"Entrepreneurial" - could mean real ownership, or understaffed. Read the paragraph.', patterns: ['entrepreneurial'] },
+  { label: '"Pivoting" - could mean adaptability valued, or chaotic priorities. Read the paragraph.', patterns: ['pivoting to different', 'pivot quickly', 'ability to pivot'] },
+  { label: '"Self-directed" - could mean autonomy, or sink-or-swim. Read the paragraph.', patterns: ['self-directed culture', 'self-directed environment'] }
 ];
 
-// ── AT A GLANCE ─────────────────────────────────────────────────────────────
+// -- AT A GLANCE -------------------------------------------------------------
 const AT_A_GLANCE = [
   { key: 'clear_expectations', label: 'Clear expectations',
     greenPatterns: ['success metrics', '30/60/90', 'measurable outcomes', 'clear instructions', 'defined goals', 'individual development plan', 'success looks like'],
@@ -334,11 +334,11 @@ function scoreJD(text) {
   });
 
   let verdict, bottomLine, fillClass, verdictClass;
-  if (overall >= 65) { verdict = 'Neurodiversity-Friendly'; bottomLine = 'This role shows positive signals across multiple dimensions. Worth pursuing — use the questions below to confirm fit before committing.'; fillClass = 'fill-go'; verdictClass = 'v-go'; }
+  if (overall >= 65) { verdict = 'Neurodiversity-Friendly'; bottomLine = 'This role shows positive signals across multiple dimensions. Worth pursuing - use the questions below to confirm fit before committing.'; fillClass = 'fill-go'; verdictClass = 'v-go'; }
   else if (overall >= 42) { verdict = 'Proceed with Caution'; bottomLine = 'This role has a mixed signal profile. Some dimensions look promising, others raise questions. The screening questions below can help you extract signal from noise.'; fillClass = 'fill-caution'; verdictClass = 'v-caution'; }
   else { verdict = 'Significant Concerns'; bottomLine = 'This role contains several patterns that tend to correlate with high cognitive load and burnout risk for neurodivergent professionals. Use the questions below to challenge your assumptions before applying.'; fillClass = 'fill-no'; verdictClass = 'v-no'; }
 
-  // Build question list — cap at 4, priority order
+  // Build question list - cap at 4, priority order
   let questions = yellowFound.map(y => y.question);
   // Deduplicate
   questions = [...new Set(questions)];
@@ -353,7 +353,7 @@ function scoreJD(text) {
     questions.push('What support systems are in place when work becomes particularly demanding?');
   }
   if (tenSecond.explicit_comms === 'unknown' && !questions.some(q => q.includes('communication'))) {
-    questions.push('What types of communication matter most in this role — written, real-time, or a mix?');
+    questions.push('What types of communication matter most in this role - written, real-time, or a mix?');
   }
 
   // Cap at 4
@@ -388,15 +388,15 @@ function render(data) {
 
   const glanceHtml = AT_A_GLANCE.map(item => {
     const state = data.tenSecond[item.key];
-    const icon = state === 'yes' ? '✓' : state === 'no' ? '✗' : '?';
+    const icon = state === 'yes' ? '\u2713' : state === 'no' ? '\u2717' : '?';
     const color = state === 'yes' ? 'var(--green-signal)' : state === 'no' ? '#c04040' : 'var(--ink-faint)';
     const note = state === 'unknown' ? 'not mentioned' : '';
     return `<div class="glance-item"><span class="glance-icon" style="color:${color};font-weight:500">${icon}</span><span class="glance-label">${item.label}</span>${note ? `<span class="glance-note">${note}</span>` : ''}</div>`;
   }).join('');
 
-  const contractBanner = data.contract ? `<div class="contract-banner">This appears to be a contract or freelance posting. Culture, environment, and support structure signals are typically absent from contract listings — the output below reflects what the language says, not necessarily what the role is like day to day.</div>` : '';
+  const contractBanner = data.contract ? `<div class="contract-banner">This appears to be a contract or freelance posting. Culture, environment, and support structure signals are typically absent from contract listings - the output below reflects what the language says, not necessarily what the role is like day to day.</div>` : '';
 
-  const contextSection = data.contextFound.length ? `<div class="section-card"><div class="section-head c-blue"><span class="dot dot-blue"></span>Worth a closer look — context-dependent</div><ul class="finding-list">${data.contextFound.map(i => `<li>${i}</li>`).join('')}</ul></div>` : '';
+  const contextSection = data.contextFound.length ? `<div class="section-card"><div class="section-head c-blue"><span class="dot dot-blue"></span>Worth a closer look - context-dependent</div><ul class="finding-list">${data.contextFound.map(i => `<li>${i}</li>`).join('')}</ul></div>` : '';
 
   const qSection = data.questions.length ? `<div class="section-card"><div class="section-head c-plum"><span class="dot dot-plum"></span>Questions to ask in screening</div><div class="q-list">${data.questions.map(q => `<div class="q-item">"${q}"</div>`).join('')}</div></div>` : '';
 
@@ -411,7 +411,7 @@ function render(data) {
     <div class="section-card"><div class="section-head c-neutral"><span class="dot dot-neutral"></span>At a glance</div><div class="glance-grid">${glanceHtml}</div></div>
     ${makeSection('dot-go', 'c-go', 'Green signals', data.allGreen)}
     ${makeSection('dot-no', 'c-no', 'Red flags', data.allRed)}
-    ${makeSection('dot-caution', 'c-caution', 'Proceed with caution — validate in screening', data.yellowFound.map(y => y.label))}
+    ${makeSection('dot-caution', 'c-caution', 'Proceed with caution - validate in screening', data.yellowFound.map(y => y.label))}
     ${contextSection}
     ${qSection}
   `;
