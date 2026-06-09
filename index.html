@@ -183,8 +183,11 @@ function findMatches(text, patterns) {
 
 function isContract(text) {
   const norm = text.toLowerCase();
-  const signals = ['per hour', '/hour', '$/hr', 'hourly rate', 'contract role', 'freelance', 'independent contractor', '1099', 'contract position', 'hourly pay'];
-  return signals.some(s => norm.includes(s));
+  const hourlySignals = ['per hour', '/hour', '$/hr', 'hourly rate', 'freelance', 'independent contractor', '1099', 'hourly pay'];
+  const timeLimitedSignals = ['time-limited position', 'fixed-term', '12-month contract', 'contract position', 'temporary position', 'term-limited'];
+  if (hourlySignals.some(s => norm.includes(s))) return 'hourly';
+  if (timeLimitedSignals.some(s => norm.includes(s))) return 'timelimited';
+  return false;
 }
 
 // -- DIMENSION 1: COGNITION --------------------------------------------------
@@ -196,12 +199,12 @@ const COGNITION_GREEN = [
 
 const COGNITION_RED = [
   { label: 'Rigid procedural execution', patterns: ['strict adherence', 'process compliance', 'execution against', 'predefined workflows', 'follow established', 'standardized processes', 'chain of command'] },
-  { label: 'Repetitive operational work', patterns: ['reporting maintenance', 'data entry', 'maintain reports', 'update dashboards', 'maintain dashboards', 'weekly reports', 'velocity targets', 'throughput'] }
+  { label: 'Repetitive operational work', patterns: ['reporting maintenance', 'maintain reports', 'update dashboards', 'maintain dashboards', 'weekly reports', 'velocity targets', 'throughput'] }
 ];
 
 // -- DIMENSION 2: ENERGY REGULATION -----------------------------------------
 const ENERGY_GREEN = [
-  { label: 'Flexible / remote / async options', patterns: ['remote-first', 'remote first', 'work from home', 'flexible hours', 'hybrid', 'async', 'asynchronous', 'flexible schedule', 'work-life balance', 'flexible start', 'quiet space', 'noise-cancelling', 'flexible work policy', 'work the hours', 'remote'] },
+  { label: 'Flexible / remote / async options', patterns: ['remote-first', 'remote first', 'work from home', 'flexible hours', 'hybrid', 'async', 'asynchronous', 'flexible schedule', 'work-life balance', 'flexible start', 'quiet space', 'noise-cancelling', 'flexible work policy', 'work the hours', 'flexible first', 'remote'] },
   { label: 'Protected focus time', patterns: ['deep work', 'focused work', 'uninterrupted', 'heads-down', 'protected time', 'independent work', 'autonomous'] },
   { label: 'Structured / sustainable pace', patterns: ['sustainable pace', 'sustainable workload', 'structured onboarding', 'regular check-ins', 'scheduled breaks', 'reasonable hours', 'work-life', 'support structure'] }
 ];
@@ -217,7 +220,7 @@ const ENERGY_RED = [
 
 // -- DIMENSION 3: AMBIGUITY --------------------------------------------------
 const AMBIGUITY_GREEN = [
-  { label: 'Conceptual / problem ambiguity (good)', patterns: ['complex problems', 'ambiguous problems', 'undefined challenges', 'make sense of', 'synthesize', 'proactive', 'strategic', 'messy data', 'noisy data', 'greenfield'] }
+  { label: 'Conceptual / problem ambiguity (good)', patterns: ['complex problems', 'ambiguous problems', 'undefined challenges', 'make sense of', 'synthesize', 'strategic', 'messy data', 'noisy data', 'greenfield'] }
 ];
 
 const AMBIGUITY_RED = [
@@ -227,10 +230,10 @@ const AMBIGUITY_RED = [
 
 // -- DIMENSION 4: ORGANIZATIONAL PSYCHOLOGY ---------------------------------
 const ORGPSYCH_GREEN = [
-  { label: 'Psychological safety / belonging', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'growth mindset', 'neurodiversity', 'neuroinclusive', 'disability', 'accommodations', 'uniquely you', 'human connection', 'fiercely authentic', 'empathy', 'mission-driven'] },
-  { label: 'Explicit communication culture', patterns: ['written communication', 'clear communication', 'transparent', 'documentation', 'well-documented', 'async communication', 'clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable outcomes', 'clear instructions', 'written instructions'] },
-  { label: 'Structured feedback / support', patterns: ['regular feedback', 'structured feedback', 'one-on-one', '1:1', 'mentorship', 'mentor', 'coaching', 'support structure', 'regular check-ins', 'onboarding', 'professional development', 'career mobility', 'individual development'] },
-  { label: 'Visible impact / decisions', patterns: ['decision support', 'informs strategy', 'informs decisions', 'shapes strategy', 'inform strategy', 'inform brand strategy', 'advisory', 'insights that drive', 'research that influences', 'your work will', 'translate insights', 'translate customer insights', 'inform product strategy', 'influence senior', 'directly influence', 'directly shapes', 'shapes customer', 'actionable recommendations', 'actionable findings', 'changes decisions', 'change decisions', 'decision-oriented', 'influence roadmap', 'influence product', 'inform and improve', 'translate directly into', 'board-level', 'key advisor', 'executive-level storytelling', 'executive storytelling'] }
+  { label: 'Psychological safety / belonging', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'growth mindset', 'neurodiversity', 'neuroinclusive', 'disability', 'accommodations', 'uniquely you', 'human connection', 'fiercely authentic', 'empathy', 'mission-driven', 'exchange ideas openly', 'everyone is heard', 'every voice'] },
+  { label: 'Explicit communication culture', patterns: ['written communication', 'clear communication', 'transparent', 'documentation', 'well-documented', 'async communication', 'clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable outcomes', 'clear instructions', 'written instructions', 'transparency is valued', 'open communication', 'we value transparency'] },
+  { label: 'Structured feedback / support', patterns: ['regular feedback', 'structured feedback', 'one-on-one', '1:1', 'mentorship', 'mentor', 'manager coaching', '1:1 coaching', 'career coaching', 'support structure', 'regular check-ins', 'onboarding', 'professional development', 'career mobility', 'individual development'] },
+  { label: 'Visible impact / decisions', patterns: ['decision support', 'informs strategy', 'informs decisions', 'shapes strategy', 'inform strategy', 'inform brand strategy', 'advisory', 'insights that drive', 'research that influences', 'your work will', 'translate insights', 'translate customer insights', 'inform product strategy', 'influence senior', 'directly influence', 'directly shapes', 'shapes customer', 'actionable recommendations', 'actionable findings', 'actionable tools', 'changes decisions', 'change decisions', 'decision-oriented', 'decision-ready', 'influence roadmap', 'influence product', 'inform and improve', 'translate directly into', 'board-level', 'key advisor', 'executive-level storytelling', 'executive storytelling', 'drives strategy', 'drive better decisions', 'real-world decision-making'] }
 ];
 
 const ORGPSYCH_RED = [
@@ -394,7 +397,11 @@ function render(data) {
     return `<div class="glance-item"><span class="glance-icon" style="color:${color};font-weight:500">${icon}</span><span class="glance-label">${item.label}</span>${note ? `<span class="glance-note">${note}</span>` : ''}</div>`;
   }).join('');
 
-  const contractBanner = data.contract ? `<div class="contract-banner">This appears to be a contract or freelance posting. Culture, environment, and support structure signals are typically absent from contract listings - the output below reflects what the language says, not necessarily what the role is like day to day.</div>` : '';
+  const contractBanner = data.contract === 'hourly'
+    ? `<div class="contract-banner">This appears to be a contract or freelance posting. Culture, environment, and support structure signals are typically absent from contract listings - the output below reflects what the language says, not necessarily what the role is like day to day.</div>`
+    : data.contract === 'timelimited'
+    ? `<div class="contract-banner">This appears to be a time-limited or fixed-term position. Consider asking about renewal likelihood, team integration, and whether benefits and development resources are available to fixed-term staff.</div>`
+    : '';
 
   const contextSection = data.contextFound.length ? `<div class="section-card"><div class="section-head c-blue"><span class="dot dot-blue"></span>Worth a closer look - context-dependent</div><ul class="finding-list">${data.contextFound.map(i => `<li>${i}</li>`).join('')}</ul></div>` : '';
 
