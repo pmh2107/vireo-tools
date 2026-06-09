@@ -183,8 +183,10 @@ function findMatches(text, patterns) {
 
 function isContract(text) {
   const norm = text.toLowerCase();
-  const hourlySignals = ['per hour', '/hour', '$/hr', 'hourly rate', 'freelance', 'independent contractor', '1099', 'hourly pay'];
+  const hourlySignals = ['per hour', '/hour', '$/hr', 'hourly rate', 'freelance', 'independent contractor', '1099', 'hourly pay', 'commission-only', 'commission only', 'access to your own laptop', 'own equipment required'];
+  const equitySignals = ['equity-only', 'equity only', 'salary on close', 'no salary at this stage', 'unpaid', 'sweat equity', 'deferred salary', 'salary upon funding', 'salary on funding'];
   const timeLimitedSignals = ['time-limited position', 'fixed-term', '12-month contract', 'contract position', 'temporary position', 'term-limited'];
+  if (equitySignals.some(s => norm.includes(s))) return 'equity';
   if (hourlySignals.some(s => norm.includes(s))) return 'hourly';
   if (timeLimitedSignals.some(s => norm.includes(s))) return 'timelimited';
   return false;
@@ -210,7 +212,7 @@ const ENERGY_GREEN = [
 ];
 
 const ENERGY_RED = [
-  { label: '"Always on" culture', patterns: ['always on', 'always-on', 'rapid response', 'immediate response', 'tight deadlines', 'fast turnaround', '24/7', 'on call'] },
+  { label: '"Always on" / high intensity culture', patterns: ['always on', 'always-on', 'rapid response', 'immediate response', 'tight deadlines', 'fast turnaround', '24/7', 'on call', 'shipped under pressure', 'ship under pressure', 'execute under pressure', 'executed under pressure'] },
   { label: 'Open plan / sensory-hostile', patterns: ['open plan', 'open office', 'open-plan', 'hotdesking', 'hot desking', 'bustling office'] },
   { label: 'Excessive meeting load', patterns: ['alignment meetings', 'status updates', 'constant communication', 'meeting-heavy', 'lots of meetings'] },
   { label: 'Heavy context switching', patterns: ['context switching', 'multiple projects simultaneously', 'switching between', 'many priorities at once'] },
@@ -224,14 +226,14 @@ const AMBIGUITY_GREEN = [
 ];
 
 const AMBIGUITY_RED = [
-  { label: 'Role / expectation ambiguity', patterns: ['role will evolve', 'responsibilities may shift', 'ambiguous expectations', 'wear many hats', 'many hats', 'wear multiple hats', 'startup culture', 'startup environment', 'scrappy', 'do it all', 'all hands on deck', 'other duties', 'fluid role', 'thrives in ambiguity', 'thrive in ambiguity', 'zero to one', 'zero-to-one', 'building from scratch', 'comfort with ambiguity', 'comfortable with ambiguity', 'shifting priorities', 'navigate ambiguity', 'navigating ambiguity', 'operate in ambiguity', 'operating in ambiguity', 'operate effectively in ambiguous', 'moves toward ambiguity', 'move toward ambiguity'] },
+  { label: 'Role / expectation ambiguity', patterns: ['role will evolve', 'responsibilities may shift', 'ambiguous expectations', 'wear many hats', 'many hats', 'wear multiple hats', 'startup culture', 'startup environment', 'scrappy', 'do it all', 'all hands on deck', 'other duties', 'fluid role', 'thrives in ambiguity', 'thrive in ambiguity', 'zero to one', 'zero-to-one', 'building from scratch', 'comfort with ambiguity', 'comfortable with ambiguity', 'shifting priorities', 'navigate ambiguity', 'navigating ambiguity', 'operate in ambiguity', 'operating in ambiguity', 'operate effectively in ambiguous', 'moves toward ambiguity', 'move toward ambiguity', 'pre-seed', 'pre seed', 'lean team', 'moving fast'] },
   { label: 'Hidden rules / unwritten expectations', patterns: ['hidden curriculum', 'unwritten rules', 'read the room', 'politically savvy', 'navigate the organization', 'informal influence', 'influence without authority', 'manage up'] }
 ];
 
 // -- DIMENSION 4: ORGANIZATIONAL PSYCHOLOGY ---------------------------------
 const ORGPSYCH_GREEN = [
-  { label: 'Psychological safety / belonging', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'growth mindset', 'neurodiversity', 'neuroinclusive', 'disability', 'accommodations', 'uniquely you', 'human connection', 'fiercely authentic', 'empathy', 'mission-driven', 'exchange ideas openly', 'everyone is heard', 'every voice'] },
-  { label: 'Explicit communication culture', patterns: ['written communication', 'clear communication', 'transparent', 'documentation', 'well-documented', 'async communication', 'clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable outcomes', 'clear instructions', 'written instructions', 'transparency is valued', 'open communication', 'we value transparency'] },
+  { label: 'Psychological safety / belonging', patterns: ['psychological safety', 'safe environment', 'inclusive', 'belonging', 'bring your whole self', 'diverse perspectives', 'growth mindset', 'neurodiversity', 'neuroinclusive', 'disability', 'accommodations', 'uniquely you', 'human connection', 'fiercely authentic', 'empathy', 'exchange ideas openly', 'everyone is heard', 'every voice'] },
+  { label: 'Explicit communication culture', patterns: ['written communication', 'clear communication', 'documentation', 'well-documented', 'async communication', 'clear expectations', 'defined goals', 'success metrics', '30/60/90', 'measurable outcomes', 'clear instructions', 'written instructions', 'transparency is valued', 'open communication', 'we value transparency'] },
   { label: 'Structured feedback / support', patterns: ['regular feedback', 'structured feedback', 'one-on-one', '1:1', 'mentorship', 'mentor', 'manager coaching', '1:1 coaching', 'career coaching', 'support structure', 'regular check-ins', 'onboarding', 'professional development', 'career mobility', 'individual development'] },
   { label: 'Visible impact / decisions', patterns: ['decision support', 'informs strategy', 'informs decisions', 'shapes strategy', 'inform strategy', 'inform brand strategy', 'advisory', 'insights that drive', 'research that influences', 'your work will', 'translate insights', 'translate customer insights', 'inform product strategy', 'influence senior', 'directly influence', 'directly shapes', 'shapes customer', 'actionable recommendations', 'actionable findings', 'actionable tools', 'changes decisions', 'change decisions', 'decision-oriented', 'decision-ready', 'influence roadmap', 'influence product', 'inform and improve', 'translate directly into', 'board-level', 'key advisor', 'executive-level storytelling', 'executive storytelling', 'drives strategy', 'drive better decisions', 'real-world decision-making'] }
 ];
@@ -349,8 +351,8 @@ function scoreJD(text) {
   if (tenSecond.clear_expectations !== 'yes' && !questions.some(q => q.includes('success look like'))) {
     questions.push('What does success look like in the first 90 days, and how is it measured?');
   }
-  if (tenSecond.visible_impact !== 'yes' && !questions.some(q => q.includes('decision'))) {
-    questions.push('Can you walk me through how research or insights from this role have influenced a recent decision?');
+  if (tenSecond.visible_impact !== 'yes' && !questions.some(q => q.includes('decision') || q.includes('impact'))) {
+    questions.push('How does work from this role typically influence decisions - can you give a recent example?');
   }
   if (tenSecond.psych_safety === 'unknown' && !questions.some(q => q.includes('support'))) {
     questions.push('What support systems are in place when work becomes particularly demanding?');
@@ -363,7 +365,7 @@ function scoreJD(text) {
   questions = questions.slice(0, 4);
 
   if (questions.length === 0) {
-    questions = ['What does success look like in the first 90 days, and how is it measured?', 'How are priorities set when multiple things feel urgent simultaneously?', 'Can you describe the level of autonomy someone in this role typically has?'];
+    questions = ['What does success look like in the first 90 days, and how is it measured?', 'How does the team communicate priorities and decisions - what does that look like day to day?', 'Can you describe the level of autonomy someone in this role typically has?'];
   }
 
   const contract = isContract(text);
@@ -397,7 +399,9 @@ function render(data) {
     return `<div class="glance-item"><span class="glance-icon" style="color:${color};font-weight:500">${icon}</span><span class="glance-label">${item.label}</span>${note ? `<span class="glance-note">${note}</span>` : ''}</div>`;
   }).join('');
 
-  const contractBanner = data.contract === 'hourly'
+  const contractBanner = data.contract === 'equity'
+    ? `<div class="contract-banner">This role appears to offer equity in lieu of salary, at least initially. Consider asking directly about compensation timeline, what triggers a salary, and what happens if funding does not close on schedule.</div>`
+    : data.contract === 'hourly'
     ? `<div class="contract-banner">This appears to be a contract or freelance posting. Culture, environment, and support structure signals are typically absent from contract listings - the output below reflects what the language says, not necessarily what the role is like day to day.</div>`
     : data.contract === 'timelimited'
     ? `<div class="contract-banner">This appears to be a time-limited or fixed-term position. Consider asking about renewal likelihood, team integration, and whether benefits and development resources are available to fixed-term staff.</div>`
@@ -436,4 +440,4 @@ function runEval() {
 }
 </script>
 </body>
-</html>
+</html> n
